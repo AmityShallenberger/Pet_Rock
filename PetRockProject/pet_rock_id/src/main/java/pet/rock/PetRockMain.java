@@ -46,7 +46,7 @@ public class PetRockMain
                     System.out.println("Press '" + exitAppInput + "' to exit the application");
                     System.out.println("--------------------------------------------------------------------------------------------------------");
 			
-                    // loop to ensure valid user input.
+                    // User input validation.
                         String userInput = "";
                         boolean validUserInput = false;
                                 
@@ -56,16 +56,23 @@ public class PetRockMain
                             
                             if(feedOnCooldown && userInput.equals("1"))
                             {
-                                // User cannot feed when on cooldown.
+                                System.out.println("You cannot feed the rock right now.");
+                                System.out.println("Try again next turn.");
                             }
                             
                             else if(playOnCooldown && userInput.equals("2"))
                             {
-                                // User cannot play when on cooldown.
+                                System.out.println("You cannot play with the rock right now.");
+                                System.out.println("Try again next turn.");
+                            }
+                            
+                            else
+                            {
+                                validUserInput = true;
                             }
                         }
 			
-                    // Gameplay Loop.
+                    // Gameplay Logic.
 			if (userInput.equals(feedRockInput)) 
 			{
 				if (petRock.getEnergy() < 1) 
@@ -182,9 +189,7 @@ public class PetRockMain
 				}
 			}
 			
-			petRock.updateStats();
-                        System.out.println(petRock);
-			
+			petRock.updateStats();			
 		}
 		
 	}
