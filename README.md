@@ -13,4 +13,6 @@ Requirements.
 	6. Mood Calculation.
 	7. File Persistence.
 
-Will - 4, 7; Amity - 5, 6;  Yarrick - 2, 3, Remove Main.java; Bohan 1
+Will - 4, 7; Amity - 5, 6;  Yarrick - 2, 3; Bohan 1
+	COMPLETED.
+	 - Yarrick: Remove Main.java.
