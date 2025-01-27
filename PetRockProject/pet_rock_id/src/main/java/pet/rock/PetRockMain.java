@@ -48,7 +48,9 @@ public class PetRockMain
 				System.err.println(e);
 			}
 		}
-		// Need to add something to the petrock to get data from the other thing.
+		else { //Who ever is in charge of being able to set name of new rocks should do it in this else statment using petRock.setName()
+
+		}
 		
 		while (shouldLoop == true) 
 		{
