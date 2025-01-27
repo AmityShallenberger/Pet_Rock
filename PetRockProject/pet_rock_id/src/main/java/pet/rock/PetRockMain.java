@@ -1,13 +1,13 @@
 package pet.rock;
 
+import java.io.File;
 import java.util.Scanner;
-
 
 public class PetRockMain 
 {
 	public static void main (String [] args) 
 	{
-		
+		File f = new File("SavedData.json");
 		Scanner input = new Scanner(System.in);
 		
 		boolean shouldLoop = true;
@@ -23,7 +23,13 @@ public class PetRockMain
 		String displayRockStatInput = "4";
 		String exitAppInput = "5";
 		
-		PetRock petRock = new PetRock("", "", 1, 1, 1);
+		PetRock petRock;
+		if (!f.exists()) {
+			petRock = new PetRock("no", "", 1, 1, 1);
+		}
+		else {
+			petRock = new PetRock("exist", "", 1, 1, 1);
+		}
 		// Need to add something to the petrock to get data from the other thing.
 		
 		while (shouldLoop == true) 
@@ -92,6 +98,8 @@ public class PetRockMain
 			// Change this to separate quitting from game over! Make sure to save rock state!
 			else if (userInput.equals(exitAppInput)) 
 			{
+
+				
 				shouldLoop = false;
 				System.out.println("Exiting Application...");
 			}
