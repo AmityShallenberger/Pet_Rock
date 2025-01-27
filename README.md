@@ -15,4 +15,4 @@ Requirements.
 
 Will - 4, 7; Amity - 5, 6;  Yarrick - 2, 3; Bohan 1
 	COMPLETED.
-	 - Yarrick: Remove Main.java.
+	 - Yarrick: Remove Main.java, Minor edits & error removal.
