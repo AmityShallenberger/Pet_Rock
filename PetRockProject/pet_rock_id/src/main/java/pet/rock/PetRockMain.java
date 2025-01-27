@@ -87,7 +87,7 @@ public class PetRockMain
 				System.out.println("Boredom: " + petRock.getBoredom());
 				System.out.println("Energy: " + petRock.getEnergy());
 				System.out.println("Mood: " + petRock.getMood());
-				petRock.setEnergy(petRock.getHunger() + 1);
+				petRock.setEnergy(petRock.getEnergy() + 1);
 			}
 			// Change this to separate quitting from game over! Make sure to save rock state!
 			else if (userInput.equals(exitAppInput)) 
