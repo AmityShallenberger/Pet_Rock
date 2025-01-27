@@ -12,10 +12,13 @@ public class PetRockMain
 		
 		boolean shouldLoop = true;
 		boolean gameOver = false;
+		int turnNumber = 0;
+		
 		
 		boolean feedOnCooldown = false;
 		boolean playOnCooldown = false;
 		int polishDiminishReturnCurrent = 0;
+		
 		
 		String feedRockInput = "1";
 		String playRockInput = "2";
@@ -23,17 +26,33 @@ public class PetRockMain
 		String displayRockStatInput = "4";
 		String exitAppInput = "5";
 		
+		//// CODE TO LOOK FOR FILE. Creates object that is set to read file (look for file for rock's state)
+		/*
+			if (fileForRock's state is valid) 
+			{
+				loadRockWithCurrentState;
+			}
+			else // file does not exist (example temporary code below PLEASE CHANGE IT WHEN ACTUALLY PROPERLY IMPLEMENTING
+			{
+				System.out.print("No save data for rock found, creating a new rock. Give your rock a name:");
+				String newRockName = input.nextLine();
+				PetRock petRock = new PetRock(newRockName, "Happy", 10, 10, 10);
+			}
+				
+		*/
+		
 		PetRock petRock = new PetRock("", "", 1, 1, 1);
 		// Need to add something to the petrock to get data from the other thing.
 		
-		while (shouldLoop == true) 
+		while ((shouldLoop == true) && (gameOver == false)) 
 		{
 			
 			if ( (petRock.getHunger() == 10) || (petRock.getBoredom() == 10) || (petRock.getEnergy() == 0) ) 
 			{
-				System.out.println("Your rock has rolled away in protest! Game over.");
-				shouldLoop = false;
+				System.out.println("Your rock has rolled away in protest! Game over. You lasted " + turnNumber + " turns!");
+				// shouldLoop = false;
 				gameOver = true;
+				break;
 			}
 		
 			System.out.println("--------------------------------------------------------------------------------------------------------");
@@ -47,12 +66,13 @@ public class PetRockMain
 			
 			String userInput = input.nextLine();
 			
-			if (userInput.equals(feedRockInput)) 
+			if ((userInput.equals(feedRockInput)) && (feedOnCooldown == false)) 
 			{
 				if (petRock.getEnergy() < 1) 
 				{
 					System.out.println("Pet rock does not have enough energy to be fed");
-				} else 
+				} 
+				else 
 				{
 					petRock.feedRock();
 					feedOnCooldown = true;
@@ -60,12 +80,13 @@ public class PetRockMain
 				playOnCooldown = false;
 				polishDiminishReturnCurrent = 0;
 			}
-			else if (userInput.equals(playRockInput))
+			else if ((userInput.equals(playRockInput)) && (playOnCooldown == false))
 			{
 				if (petRock.getEnergy() < 2) 
 				{
 					System.out.println("Pet rock does not have enough energy to play");
-				} else 
+				} 
+				else 
 				{
 					petRock.playRock();
 					playOnCooldown = true;
@@ -88,16 +109,19 @@ public class PetRockMain
 				System.out.println("Boredom: " + petRock.getBoredom());
 				System.out.println("Energy: " + petRock.getEnergy());
 				System.out.println("Mood: " + petRock.getMood());
-				petRock.setEnergy(petRock.getHunger() + 1);
+				
+				petRock.setEnergy(petRock.getEnergy() + 1);
 			}
 			// Change this to separate quitting from game over! Make sure to save rock state!
 			else if (userInput.equals(exitAppInput)) 
 			{
 				shouldLoop = false;
+				// Add save rock state code here!!!!!!!!!!!!!!!!!!!!
 				System.out.println("Exiting Application...");
 			}
 			else 
 			{
+				petRock.setEnergy(petRock.getEnergy() + 1);
 				System.out.println("Invalid Input: Please enter a valid command.");
 			}
 			
@@ -105,9 +129,10 @@ public class PetRockMain
 			petRock.setBoredom(petRock.getBoredom() + 1);
 			
 			////// Random EVENTS
-			int propertyOfEvent = (int)(Math.random() * 3);
+			int propertyOfEvent = (int)(Math.random() * 5);
 			int typeOfEvent = (int)(Math.random() * 10);
 			
+			// Should have a random event this turn?
 			if (propertyOfEvent < 3) 
 			{
 				// Positive
@@ -170,7 +195,10 @@ public class PetRockMain
 			
 			petRock.updateStats();
 			
+			turnNumber += 1;
+			
 		}
+		
 		
 	}
     
