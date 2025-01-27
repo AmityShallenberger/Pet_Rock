@@ -1,13 +1,20 @@
 package pet.rock;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.util.Scanner;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class PetRockMain 
 {
 	public static void main (String [] args) 
 	{
+		//Get file the make settings for gson
 		File f = new File("SavedData.json");
+		GsonBuilder gsonB = new GsonBuilder();
+		
 		Scanner input = new Scanner(System.in);
 		
 		boolean shouldLoop = true;
@@ -23,12 +30,23 @@ public class PetRockMain
 		String displayRockStatInput = "4";
 		String exitAppInput = "5";
 		
-		PetRock petRock;
-		if (!f.exists()) {
-			petRock = new PetRock("no", "", 1, 1, 1);
-		}
-		else {
-			petRock = new PetRock("exist", "", 1, 1, 1);
+		//Make a rock, if saved data exists make the rock with the saved stats
+		PetRock petRock = new PetRock("", "", 1, 1, 1);
+		if (f.exists()) {
+			Gson gson = new Gson();
+
+			try {
+				Scanner readFile = new Scanner(f);
+				String currJson = "";
+
+				while (readFile.hasNext()) {
+					currJson = currJson + readFile.nextLine();
+				}
+
+				petRock = gson.fromJson(currJson, PetRock.class);
+			} catch (Exception e) {
+				System.err.println(e);
+			}
 		}
 		// Need to add something to the petrock to get data from the other thing.
 		
@@ -40,6 +58,7 @@ public class PetRockMain
 				System.out.println("Your rock has rolled away in protest! Game over.");
 				shouldLoop = false;
 				gameOver = true;
+				f.delete(); //delete saved data if gameover
 			}
 		
 			System.out.println("--------------------------------------------------------------------------------------------------------");
@@ -98,8 +117,7 @@ public class PetRockMain
 			// Change this to separate quitting from game over! Make sure to save rock state!
 			else if (userInput.equals(exitAppInput)) 
 			{
-
-				
+				input.close();	
 				shouldLoop = false;
 				System.out.println("Exiting Application...");
 			}
@@ -176,7 +194,23 @@ public class PetRockMain
 			}
 			
 			petRock.updateStats();
-			
+
+			//After every action turn the current stats into json then write to the current json file
+			try {
+				if (!f.exists()) {
+					f = new File("SavedData.json");
+				} 
+
+				String jsonData = gsonB.setPrettyPrinting().create().toJson(petRock);
+
+				FileWriter fw = new FileWriter(f.getPath());
+
+				fw.write(jsonData);	
+				fw.close();
+
+			} catch (Exception e) {
+				System.err.println(e);
+			}
 		}
 		
 	}
