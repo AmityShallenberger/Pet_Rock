@@ -139,5 +139,19 @@ public class PetRock
 
             }
 
-	
+        // Miscellaneous Methods.
+            @Override
+            public String toString()
+            {
+                String output = "";
+                
+                // Setting up output.
+                    output += "\tName: " + name;
+                    output += "\n\tHunger: " + hunger;
+                    output += "\n\tBoredom: " + boredom;
+                    output += "\n\tEnergy: " + energy;
+                    output += "\n\tMood: " + mood;
+                
+                return output;
+            }
 }

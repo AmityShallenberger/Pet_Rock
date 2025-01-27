@@ -82,12 +82,8 @@ public class PetRockMain
 			}
 			else if (userInput.equals(displayRockStatInput))
 			{
-				System.out.println("Name: " + petRock.getName());
-				System.out.println("Hunger: " + petRock.getHunger());
-				System.out.println("Boredom: " + petRock.getBoredom());
-				System.out.println("Energy: " + petRock.getEnergy());
-				System.out.println("Mood: " + petRock.getMood());
-				petRock.setEnergy(petRock.getHunger() + 1);
+				System.out.println(petRock);
+				petRock.setEnergy(petRock.getEnergy() + 1);
 			}
 			// Change this to separate quitting from game over! Make sure to save rock state!
 			else if (userInput.equals(exitAppInput)) 
@@ -172,5 +168,4 @@ public class PetRockMain
 		}
 		
 	}
-    
 }
