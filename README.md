@@ -13,6 +13,12 @@ Requirements.
 	6. Mood Calculation.
 	7. File Persistence.
 
-Will - 4, 7; Amity - 5, 6;  Yarrick - 2, 3; Bohan 1
-	COMPLETED.
-	 - Yarrick: Remove Main.java, Minor edits & error removal.
+Will - 4, 7; Amity - 5, 6, Bug Duty;  Yarrick - 2, 3; Bohan 1
+	
+Edit the palm file.
+	Make command.
+
+Did 1/28 1PM Yarrick:
+	> Put the menu into a method called display().
+	> Converted userInput to an integer to make code easier to read.
+	> Put user input collection and validation into a separate method.
