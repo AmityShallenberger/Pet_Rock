@@ -181,7 +181,7 @@ public class PetRockMain
 							break;
 						case 3: 
 							System.out.println("Your rock is feeling out of it today. Energy decreased!");
-							petRock.setHunger(petRock.getHunger() + 2);
+							petRock.setEnergy(petRock.getEnergy() - 2);
 							break;
 						case 4: 
 							break;
