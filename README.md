@@ -14,8 +14,5 @@ Requirements.
 	7. File Persistence.
 
 Will - 4, 7; Amity - 5, 6;  Yarrick - 2, 3; Bohan 1
-
-1/29:
-	Yarrick completed both of his tasks.
-	William got the JSON stuff working.
-	Amity is having technical difficulties and working on the random events.
+	COMPLETED.
+	 - Yarrick: Remove Main.java, Minor edits & error removal.
