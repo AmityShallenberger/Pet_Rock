@@ -59,10 +59,10 @@ public class PetRockMain
 			
 			if ( (petRock.getHunger() == 10) || (petRock.getBoredom() == 10) || (petRock.getEnergy() == 0) ) 
 			{
+				f.delete(); //delete saved data if gameover
 				System.out.println("Your rock has rolled away in protest! Game over. You lasted " + turnNumber + " turns!");
 				// shouldLoop = false;
 				gameOver = true;
-				f.delete(); //delete saved data if gameover
 				break;
 			}
 		
