@@ -21,17 +21,16 @@ public class PetRockMain
 		while (shouldLoop == true) 
 		{
 		
-                    if ( (petRock.getHunger() == 10) || (petRock.getBoredom() == 10) || (petRock.getEnergy() == 0) ) 
+                    if ( (petRock.getHunger() == 10) || (petRock.getBoredom() == 10) 
+                            || (petRock.getEnergy() == 0) ) 
                     {
                         System.out.println("Your rock has rolled away in protest! Game over.");
 			shouldLoop = false;
 			gameOver = true;
                     }
 		
-                    display(feedOnCooldown, playOnCooldown);
-			
-                    // Input validation.
-                        int userInput = getUserInput(feedOnCooldown, playOnCooldown);
+                    display(feedOnCooldown, playOnCooldown); // display menu.	
+                    int userInput = getUserInput(feedOnCooldown, playOnCooldown); // user input.
 
                     // Gameplay Logic.
                         // 1.
@@ -81,7 +80,8 @@ public class PetRockMain
 			}
                         
                         // 5.
-			// Change this to separate quitting from game over! Make sure to save rock state!
+			// Change this to separate quitting from game over! 
+                        // Make sure to save rock state!
 			else
 			{
 				shouldLoop = false;
