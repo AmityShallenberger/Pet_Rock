@@ -138,7 +138,7 @@ public class PetRockMain
                     petRock.setHunger(petRock.getHunger() + 1);
                     petRock.setBoredom(petRock.getBoredom() + 1);
 
-                    ////// Random EVENTS
+                    // Random events.
                     int propertyOfEvent = (int)(Math.random() * 5);
                     int typeOfEvent = (int)(Math.random() * 10);
 
