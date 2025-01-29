@@ -1,6 +1,5 @@
 package pet.rock;
 
-
 public class PetRock
 {
 
@@ -13,11 +12,11 @@ public class PetRock
 	
     public PetRock(String setName, String setMood, int setHunger, int setBoredom, int setEnergy)
     {
-        name = setName;
-	mood = setMood;
-	hunger = setHunger;
-	boredom = setBoredom;
-	energy = setEnergy;
+      name = setName;
+	    mood = setMood;
+	    hunger = setHunger;
+	    boredom = setBoredom;
+	    energy = setEnergy;
     }
 	
     // Get-Methods.

@@ -37,7 +37,8 @@ public class PetRockMain
                         Scanner readFile = new Scanner(f);
                         String currJson = "";
 
-                        while (readFile.hasNext()) {
+                        while (readFile.hasNext()) 
+                        {
                             currJson = currJson + readFile.nextLine();
                         }
 
@@ -51,7 +52,7 @@ public class PetRockMain
 		}
                 
 		else 
-                { 
+    { 
                     //Who ever is in charge of being able to set name of new rocks should do it in this else statment using petRock.setName()
                     // NEED TO DO THIS TODAY FOR ME.
 		}
