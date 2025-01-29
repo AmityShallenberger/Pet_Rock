@@ -1,12 +1,19 @@
 package pet.rock;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.util.Scanner;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class PetRockMain 
 {
 	public static void main (String [] args) 
 	{
+		//Get file the make settings for gson
+		File f = new File("SavedData.json");
+		GsonBuilder gsonB = new GsonBuilder();
 		
 		Scanner input = new Scanner(System.in);
 		
@@ -26,23 +33,26 @@ public class PetRockMain
 		String displayRockStatInput = "4";
 		String exitAppInput = "5";
 		
-		//// CODE TO LOOK FOR FILE. Creates object that is set to read file (look for file for rock's state)
-		/*
-			if (fileForRock's state is valid) 
-			{
-				loadRockWithCurrentState;
-			}
-			else // file does not exist (example temporary code below PLEASE CHANGE IT WHEN ACTUALLY PROPERLY IMPLEMENTING
-			{
-				System.out.print("No save data for rock found, creating a new rock. Give your rock a name:");
-				String newRockName = input.nextLine();
-				PetRock petRock = new PetRock(newRockName, "Happy", 10, 10, 10);
-			}
-				
-		*/
-		
 		PetRock petRock = new PetRock("", "", 1, 1, 1);
-		// Need to add something to the petrock to get data from the other thing.
+		if (f.exists()) {
+			Gson gson = new Gson();
+
+			try {
+				Scanner readFile = new Scanner(f);
+				String currJson = "";
+
+				while (readFile.hasNext()) {
+					currJson = currJson + readFile.nextLine();
+				}
+
+				petRock = gson.fromJson(currJson, PetRock.class);
+			} catch (Exception e) {
+				System.err.println(e);
+			}
+		}
+		else { //Who ever is in charge of being able to set name of new rocks should do it in this else statment using petRock.setName()
+			// NEED TO DO THIS TODAY FOR ME.
+		}
 		
 		while ((shouldLoop == true) && (gameOver == false)) 
 		{
@@ -52,6 +62,7 @@ public class PetRockMain
 				System.out.println("Your rock has rolled away in protest! Game over. You lasted " + turnNumber + " turns!");
 				// shouldLoop = false;
 				gameOver = true;
+				f.delete(); //delete saved data if gameover
 				break;
 			}
 		
@@ -109,12 +120,12 @@ public class PetRockMain
 				System.out.println("Boredom: " + petRock.getBoredom());
 				System.out.println("Energy: " + petRock.getEnergy());
 				System.out.println("Mood: " + petRock.getMood());
-				
 				petRock.setEnergy(petRock.getEnergy() + 1);
 			}
 			// Change this to separate quitting from game over! Make sure to save rock state!
 			else if (userInput.equals(exitAppInput)) 
 			{
+				input.close();	
 				shouldLoop = false;
 				// Add save rock state code here!!!!!!!!!!!!!!!!!!!!
 				System.out.println("Exiting Application...");
@@ -196,7 +207,24 @@ public class PetRockMain
 			petRock.updateStats();
 			
 			turnNumber += 1;
-			
+
+			//After every action turn the current stats into json then write to the current json file
+			try {
+				if (!f.exists()) {
+					f = new File("SavedData.json");
+				} 
+
+				String jsonData = gsonB.setPrettyPrinting().create().toJson(petRock);
+
+				FileWriter fw = new FileWriter(f.getPath());
+
+				fw.write(jsonData);	
+				fw.close();
+
+			} catch (Exception e) {
+				System.err.println(e);
+			}
+
 		}
 		
 		
