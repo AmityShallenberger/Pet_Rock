@@ -164,7 +164,7 @@ public class PetRockMain
         // Takes in feed and play cooldowns to determine available options.
         public static void display(boolean cooldownFEED, boolean cooldownPLAY)
         {
-            System.out.println("-------------------------------------------------" + 
+            System.out.println("\n-------------------------------------------------" + 
                     "-------------------------------------------------------");
             System.out.println( ((cooldownFEED == true) ? "Feeding rock is on cooldown." : 
                     "Press '1' to feed the rock") );

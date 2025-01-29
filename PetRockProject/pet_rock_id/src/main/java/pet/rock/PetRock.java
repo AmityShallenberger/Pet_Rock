@@ -146,7 +146,7 @@ public class PetRock
                 String output = "";
                 
                 // Setting up output.
-                    output += "Rock Stats.";
+                    output += "\nRock Stats.";
                     output += "\n\tName: " + name;
                     output += "\n\tHunger: " + hunger;
                     output += "\n\tBoredom: " + boredom;
