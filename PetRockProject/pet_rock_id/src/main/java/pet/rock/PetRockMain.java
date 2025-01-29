@@ -19,10 +19,13 @@ public class PetRockMain
 		
 		boolean shouldLoop = true;
 		boolean gameOver = false;
+		int turnNumber = 0;
+		
 		
 		boolean feedOnCooldown = false;
 		boolean playOnCooldown = false;
 		int polishDiminishReturnCurrent = 0;
+		
 		
 		String feedRockInput = "1";
 		String playRockInput = "2";
@@ -30,7 +33,6 @@ public class PetRockMain
 		String displayRockStatInput = "4";
 		String exitAppInput = "5";
 		
-		//Make a rock, if saved data exists make the rock with the saved stats
 		PetRock petRock = new PetRock("", "", 1, 1, 1);
 		if (f.exists()) {
 			Gson gson = new Gson();
@@ -49,18 +51,19 @@ public class PetRockMain
 			}
 		}
 		else { //Who ever is in charge of being able to set name of new rocks should do it in this else statment using petRock.setName()
-
+			// NEED TO DO THIS TODAY FOR ME.
 		}
 		
-		while (shouldLoop == true) 
+		while ((shouldLoop == true) && (gameOver == false)) 
 		{
 			
 			if ( (petRock.getHunger() == 10) || (petRock.getBoredom() == 10) || (petRock.getEnergy() == 0) ) 
 			{
-				System.out.println("Your rock has rolled away in protest! Game over.");
-				shouldLoop = false;
+				System.out.println("Your rock has rolled away in protest! Game over. You lasted " + turnNumber + " turns!");
+				// shouldLoop = false;
 				gameOver = true;
 				f.delete(); //delete saved data if gameover
+				break;
 			}
 		
 			System.out.println("--------------------------------------------------------------------------------------------------------");
@@ -74,12 +77,13 @@ public class PetRockMain
 			
 			String userInput = input.nextLine();
 			
-			if (userInput.equals(feedRockInput)) 
+			if ((userInput.equals(feedRockInput)) && (feedOnCooldown == false)) 
 			{
 				if (petRock.getEnergy() < 1) 
 				{
 					System.out.println("Pet rock does not have enough energy to be fed");
-				} else 
+				} 
+				else 
 				{
 					petRock.feedRock();
 					feedOnCooldown = true;
@@ -87,12 +91,13 @@ public class PetRockMain
 				playOnCooldown = false;
 				polishDiminishReturnCurrent = 0;
 			}
-			else if (userInput.equals(playRockInput))
+			else if ((userInput.equals(playRockInput)) && (playOnCooldown == false))
 			{
 				if (petRock.getEnergy() < 2) 
 				{
 					System.out.println("Pet rock does not have enough energy to play");
-				} else 
+				} 
+				else 
 				{
 					petRock.playRock();
 					playOnCooldown = true;
@@ -109,6 +114,7 @@ public class PetRockMain
 			}
 			else if (userInput.equals(displayRockStatInput))
 			{
+
 				System.out.println("Name: " + petRock.getName());
 				System.out.println("Hunger: " + petRock.getHunger());
 				System.out.println("Boredom: " + petRock.getBoredom());
@@ -121,10 +127,12 @@ public class PetRockMain
 			{
 				input.close();	
 				shouldLoop = false;
+				// Add save rock state code here!!!!!!!!!!!!!!!!!!!!
 				System.out.println("Exiting Application...");
 			}
 			else 
 			{
+				petRock.setEnergy(petRock.getEnergy() + 1);
 				System.out.println("Invalid Input: Please enter a valid command.");
 			}
 			
@@ -132,9 +140,10 @@ public class PetRockMain
 			petRock.setBoredom(petRock.getBoredom() + 1);
 			
 			////// Random EVENTS
-			int propertyOfEvent = (int)(Math.random() * 3);
+			int propertyOfEvent = (int)(Math.random() * 5);
 			int typeOfEvent = (int)(Math.random() * 10);
 			
+			// Should have a random event this turn?
 			if (propertyOfEvent < 3) 
 			{
 				// Positive
@@ -183,7 +192,7 @@ public class PetRockMain
 							break;
 						case 3: 
 							System.out.println("Your rock is feeling out of it today. Energy decreased!");
-							petRock.setHunger(petRock.getHunger() + 2);
+							petRock.setEnergy(petRock.getEnergy() - 2);
 							break;
 						case 4: 
 							break;
@@ -196,6 +205,8 @@ public class PetRockMain
 			}
 			
 			petRock.updateStats();
+			
+			turnNumber += 1;
 
 			//After every action turn the current stats into json then write to the current json file
 			try {
@@ -213,7 +224,9 @@ public class PetRockMain
 			} catch (Exception e) {
 				System.err.println(e);
 			}
+
 		}
+		
 		
 	}
     
