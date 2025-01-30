@@ -87,12 +87,35 @@ public class PetRock
 		energy -= 2;
 	}
 
-	public void polishRock() //(int diminishingReturn)
+	public void polishRock(int diminishingReturn)
 	{
-		hunger -= 1; // / (1 + diminishingReturn);
-		boredom -= 1;
-		energy += 1;
-		mood = "Happy";
+		// EDIT SO SOME OF THESE ONLY FIRE WHEN THE STATS ARE A CERTAIN AMOUNT E.G. WONT BE SAD IF POLISHED ON DIMINISHING RETURN IF CERTAIN STATS ARE HIGH ENOUGH.
+		// done!
+		switch (diminishingReturn) 
+		{
+			case 0:
+				hunger -= 1;
+				boredom -= 1;
+				energy += 1;
+				mood = "Happy"; 
+				break;
+			case 1:
+				hunger -= 1;
+				energy += 1;
+				updateMood();
+				break;
+			case 2:
+				hunger -= 1;
+				updateMood();
+				break;
+			case 3: 
+				updateMood();
+				break;
+			default: break;
+		}
+		
+		
+		
 		// Diminshing returns somehow
 	}
 

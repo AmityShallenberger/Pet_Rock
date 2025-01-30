@@ -50,8 +50,12 @@ public class PetRockMain
 				System.err.println(e);
 			}
 		}
-		else { //Who ever is in charge of being able to set name of new rocks should do it in this else statment using petRock.setName()
-			// NEED TO DO THIS TODAY FOR ME.
+		else { // Whoever is in charge of being able to set name of new rocks should do it in this else statment using petRock.setName()
+			
+			System.out.print("No save data found for rock. A pet rock must be created. Please enter a name for your rock: ");
+			String newRockName = input.nextLine();
+			petRock.setName(newRockName);
+			
 		}
 		
 		while ((shouldLoop == true) && (gameOver == false)) 
@@ -60,9 +64,8 @@ public class PetRockMain
 			if ( (petRock.getHunger() == 10) || (petRock.getBoredom() == 10) || (petRock.getEnergy() == 0) ) 
 			{
 				System.out.println("Your rock has rolled away in protest! Game over. You lasted " + turnNumber + " turns!");
-				// shouldLoop = false;
 				gameOver = true;
-				f.delete(); //delete saved data if gameover
+				f.delete(); // delete saved data if game over
 				break;
 			}
 		
@@ -70,7 +73,7 @@ public class PetRockMain
 			System.out.println( ((feedOnCooldown == true) ? "Feeding rock is on cooldown." : "Press '" + feedRockInput + "' to feed the rock") );
 			System.out.println( ((playOnCooldown == true) ? "Playing with rock is on cooldown." : "Press '" + playRockInput + "' to play with the rock") );
 
-			System.out.println("Press '" + polishRockInput + "' to polish the rock");
+			System.out.println("Press '" + polishRockInput + "' to polish the rock (diminishing returns occur)");
 			System.out.println("Press '" + displayRockStatInput + "' to display the rock's status");
 			System.out.println("Press '" + exitAppInput + "' to exit the application");
 			System.out.println("--------------------------------------------------------------------------------------------------------");
@@ -107,7 +110,7 @@ public class PetRockMain
 			}
 			else if (userInput.equals(polishRockInput))
 			{
-				petRock.polishRock();
+				petRock.polishRock(polishDiminishReturnCurrent);
 				polishDiminishReturnCurrent += 1;
 				feedOnCooldown = false;
 				playOnCooldown = false;
@@ -120,19 +123,27 @@ public class PetRockMain
 				System.out.println("Boredom: " + petRock.getBoredom());
 				System.out.println("Energy: " + petRock.getEnergy());
 				System.out.println("Mood: " + petRock.getMood());
+				
+				feedOnCooldown = false;
+				playOnCooldown = false;
+				polishDiminishReturnCurrent = 0;
+				
 				petRock.setEnergy(petRock.getEnergy() + 1);
+				
+				
 			}
 			// Change this to separate quitting from game over! Make sure to save rock state!
 			else if (userInput.equals(exitAppInput)) 
 			{
 				input.close();	
 				shouldLoop = false;
-				// Add save rock state code here!!!!!!!!!!!!!!!!!!!!
 				System.out.println("Exiting Application...");
 			}
 			else 
 			{
+				
 				petRock.setEnergy(petRock.getEnergy() + 1);
+				
 				System.out.println("Invalid Input: Please enter a valid command.");
 			}
 			
@@ -144,7 +155,7 @@ public class PetRockMain
 			int typeOfEvent = (int)(Math.random() * 10);
 			
 			// Should have a random event this turn?
-			if (propertyOfEvent < 3) 
+			if ((propertyOfEvent < 3) && (shouldLoop == true) && (gameOver == false))
 			{
 				// Positive
 				if (propertyOfEvent == 0) 
@@ -163,12 +174,6 @@ public class PetRockMain
 						case 2: 
 							System.out.println("Your rock found a snack! Satiated some Hunger!");
 							petRock.setHunger(petRock.getHunger() - 3);
-							break;
-						case 3: 
-							break;
-						case 4: 
-							break;
-						case 5: 
 							break;
 						default: break;
 					}
@@ -194,10 +199,6 @@ public class PetRockMain
 							System.out.println("Your rock is feeling out of it today. Energy decreased!");
 							petRock.setEnergy(petRock.getEnergy() - 2);
 							break;
-						case 4: 
-							break;
-						case 5: 
-							break;
 						default: break;
 					}
 	
@@ -209,6 +210,7 @@ public class PetRockMain
 			turnNumber += 1;
 
 			//After every action turn the current stats into json then write to the current json file
+			
 			try {
 				if (!f.exists()) {
 					f = new File("SavedData.json");
@@ -226,6 +228,8 @@ public class PetRockMain
 			}
 
 		}
+		
+		
 		
 		
 	}
