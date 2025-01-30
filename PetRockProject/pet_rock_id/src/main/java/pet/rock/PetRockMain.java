@@ -50,12 +50,14 @@ public class PetRockMain
 				System.err.println(e);
 			}
 		}
-		else { // Whoever is in charge of being able to set name of new rocks should do it in this else statment using petRock.setName()
+		else {
 			
 			System.out.print("No save data found for rock. A pet rock must be created. Please enter a name for your rock: ");
 			String newRockName = input.nextLine();
 			petRock.setName(newRockName);
-			
+			petRock.setHunger(6);
+			petRock.setBoredom(6);
+			petRock.setEnergy(10);
 		}
 		
 		while ((shouldLoop == true) && (gameOver == false)) 

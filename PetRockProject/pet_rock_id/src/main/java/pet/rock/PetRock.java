@@ -161,12 +161,5 @@ public class PetRock
 
 	}
 	
-	////////// PROBABLY SHOULD RETURN SOMETHING. IDK. NEED TO IMPLEMENT LATER
-	public void saveRock() 
-	{
-		System.out.print("Saving rock...");
-	}
-	
-	
 	
 }
