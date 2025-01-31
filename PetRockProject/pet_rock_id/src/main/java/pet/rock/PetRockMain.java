@@ -221,6 +221,7 @@ public class PetRockMain
 			turnNumber += 1;
 
 			//After every action turn the current stats into json then write to the current json file
+			
 			try {
 				if (!f.exists()) {
 					f = new File("SavedData.json");
@@ -236,7 +237,7 @@ public class PetRockMain
 			} catch (Exception e) {
 				System.err.println(e);
 			}
-
+			
 		}
 		
 		
