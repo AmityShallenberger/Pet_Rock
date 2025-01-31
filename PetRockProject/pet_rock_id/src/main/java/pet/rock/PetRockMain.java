@@ -53,7 +53,9 @@ public class PetRockMain
 		}
 		else 
 		{
-			System.out.print("No save data found for rock. A pet rock must be created. Please enter a name for your rock: ");
+			System.out.print("No save data found for rock.\n" + 
+                                "A pet rock must be created.\n" + 
+                                "Please enter a name for your rock: ");
 			String newRockName = input.nextLine();
 			petRock.setName(newRockName);
 		}
@@ -190,6 +192,8 @@ public class PetRockMain
 			}
 
 			petRock.updateStats();
+            petRock.updateMood();
+                        
 			turnNumber += 1;
 			if (petRock.getEnergy() == 0)
 			{
