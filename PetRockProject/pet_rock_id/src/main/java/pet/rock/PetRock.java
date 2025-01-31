@@ -97,7 +97,7 @@ public class PetRock
          
 
        
-        public void polishRock() //(int diminishingReturn)
+        public void polishRock(int diminishingReturn) //(int diminishingReturn)
         {
                     hunger -= 1; // / (1 + diminishingReturn);
                     boredom -= 1;

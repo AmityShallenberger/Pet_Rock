@@ -167,7 +167,6 @@ public class PetRockMain
 							System.out.println("\nYour rock found a snack! Satiated some Hunger!");
 							petRock.setHunger(petRock.getHunger() - 3);
 							break;
-<<<<<<< HEAD
 						case 3: 
 							System.out.println("Your rock got flirted with your rock is now happy!");
 							petRock.setMood("Happy");
@@ -184,8 +183,6 @@ public class PetRockMain
 							petRock.setBoredom(petRock.getBoredom() - 1);
 							petRock.setEnergy(petRock.getEnergy() + 1);
 							break;
-=======
->>>>>>> b5d18801a9645ae804823de264e9028a33b686ba
 						default: break;
 					}
 				}
@@ -210,15 +207,12 @@ public class PetRockMain
 							System.out.println("\nYour rock is feeling out of it today. Energy decreased!");
 							petRock.setEnergy(petRock.getEnergy() - 2);
 							break;
-<<<<<<< HEAD
 						case 4: 
 							System.out.println("Your rock lost a friend.  Hunger increased and energy decreased");
 							petRock.setEnergy(petRock.getEnergy() - 1);
 							petRock.setHunger(petRock.getHunger() + 1);
 							break;
 				
-=======
->>>>>>> b5d18801a9645ae804823de264e9028a33b686ba
 						default: break;
 					}
 				}
@@ -229,13 +223,11 @@ public class PetRockMain
 			turnNumber += 1;
 
 			//After every action turn the current stats into json then write to the current json file
-<<<<<<< HEAD
+
 			
 			try {
-=======
-			try 
-			{
->>>>>>> b5d18801a9645ae804823de264e9028a33b686ba
+
+
 				if (!f.exists()) {
 					f = new File("SavedData.json");
 				} 
@@ -298,9 +290,6 @@ public class PetRockMain
 			{
 				validIntegerInput = false;
 			}
-<<<<<<< HEAD
-			
-=======
 
 			// User has entered a non-integer value OR
 			// an integer value that is not between 1 and 5.
@@ -324,14 +313,9 @@ public class PetRockMain
 
 			else
 				validUserInput = true;
->>>>>>> b5d18801a9645ae804823de264e9028a33b686ba
 		}
 		
 		return userInputAsInt;
 	}
-<<<<<<< HEAD
     
 }
-=======
-}
->>>>>>> b5d18801a9645ae804823de264e9028a33b686ba
