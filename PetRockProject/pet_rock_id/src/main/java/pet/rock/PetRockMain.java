@@ -26,7 +26,7 @@ public class PetRockMain
 		boolean playOnCooldown = false;
 		int polishDiminishReturnCurrent = 0;
 		
-		PetRock petRock = new PetRock("", "", 1, 1, 100);
+		PetRock petRock = new PetRock("", "", 1, 1, 10);
                 
 		if (f.exists()) 
 		{
@@ -52,12 +52,11 @@ public class PetRockMain
 		}
 		else 
 		{
-			System.out.print("No save data found for rock. A pet rock must be created. Please enter a name for your rock: ");
+			System.out.print("No save data found for rock.\n" + 
+                                "A pet rock must be created.\n" + 
+                                "Please enter a name for your rock: ");
 			String newRockName = input.nextLine();
 			petRock.setName(newRockName);
-			petRock.setHunger(6);
-			petRock.setBoredom(6);
-			petRock.setEnergy(10);
 		}
 		
 		while ((shouldLoop == true) && (gameOver == false)) 
@@ -197,7 +196,8 @@ public class PetRockMain
 			}
 
 			petRock.updateStats();
-
+                        petRock.updateMood();
+                        
 			turnNumber += 1;
 
 			//After every action turn the current stats into json then write to the current json file
