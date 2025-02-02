@@ -1,100 +1,122 @@
 package pet.rock;
 
-
 public class PetRock
 {
 
-	private String name;
-	private String mood;
-	private int hunger;
-	private int boredom;
-	private int energy;
+    private String name;
+    private String mood;
+    private int hunger;
+    private int boredom;
+    private int energy;
 	
 	
-	public PetRock(String setName, String setMood, int setHunger, int setBoredom, int setEnergy)
+    public PetRock(String setName, String setMood, int setHunger, int setBoredom, int setEnergy)
+    {
+        name = setName;
+        mood = setMood;
+        hunger = setHunger;
+        boredom = setBoredom;
+        energy = setEnergy;
+    }
+	
+    // Get-Methods.
+        public String getName()
+        {
+            return name;
+        }
+
+        public String getMood()
+        {
+            return mood;
+        }
+        
+        public int getHunger()
+        {
+            return hunger;
+        }
+
+        public int getBoredom()
+        {
+            return boredom;
+        }
+
+        public int getEnergy()
+        {
+            return energy;
+        }
+	
+    // Set-Methods.
+        public void setName(String newName)
+        {
+                name = newName;
+        }
+
+        public void setMood(String newMood)
+        {
+                mood = newMood;
+        }
+
+        public void setHunger(int newHunger)
+        {
+                hunger = newHunger;
+        }
+
+        public void setBoredom(int newBoredom)
+        {
+                boredom = newBoredom;
+        }
+
+        public void setEnergy(int newEnergy)
+        {
+                energy = newEnergy;
+        }
+
+
+    // Gameplay Methods.
+        public void feedRock()
+        {
+                hunger -= 2;
+                boredom += 1;
+                energy -= 1;
+        }
+
+        public void playRock()
+        {
+                boredom -= 3;
+                hunger += 1;
+                energy -= 2;
+        }
+		
+		
+	public void polishRock(int diminishingReturn)
 	{
-		name = setName;
-		mood = setMood;
-		hunger = setHunger;
-		boredom = setBoredom;
-		energy = setEnergy;
-	}
-	
-// Get-Methods.
-	public String getName()
-	{
-		return name;
+		// EDIT SO SOME OF THESE ONLY FIRE WHEN THE STATS ARE A CERTAIN AMOUNT E.G. WONT BE SAD IF POLISHED ON DIMINISHING RETURN IF CERTAIN STATS ARE HIGH ENOUGH.
+		// done!
+		switch (diminishingReturn) 
+		{
+			case 0:
+				hunger -= 1;
+				boredom -= 1;
+				energy += 1;
+				mood = "Happy"; 
+				break;
+			case 1:
+				hunger -= 1;
+				energy += 1;
+				updateMood();
+				break;
+			case 2:
+				hunger -= 1;
+				updateMood();
+				break;
+			case 3: 
+				updateMood();
+				break;
+			default: break;
+		}
+		
 	}
 
-	public String getMood()
-	{
-		return mood;
-	}
-	
-	public int getHunger()
-	{
-		return hunger;
-	}
-	
-	public int getBoredom()
-	{
-		return boredom;
-	}
-	
-	public int getEnergy()
-	{
-		return energy;
-	}
-	
-// Set-Methods.
-	public void setName(String newName)
-	{
-		name = newName;
-	}
-	
-	public void setMood(String newMood)
-	{
-		mood = newMood;
-	}
-	
-	public void setHunger(int newHunger)
-	{
-		hunger = newHunger;
-	}
-	
-	public void setBoredom(int newBoredom)
-	{
-		boredom = newBoredom;
-	}
-	
-	public void setEnergy(int newEnergy)
-	{
-		energy = newEnergy;
-	}
-
-// Gameplay Methods.
-	public void feedRock()
-	{
-		hunger -= 2;
-		boredom += 1;
-		energy -= 1;
-	}
-
-	public void playRock()
-	{
-		boredom -= 3;
-		hunger += 1;
-		energy -= 2;
-	}
-
-	public void polishRock() //(int diminishingReturn)
-	{
-		hunger -= 1; // / (1 + diminishingReturn);
-		boredom -= 1;
-		energy += 1;
-		mood = "Happy";
-		// Diminshing returns somehow
-	}
 
 	public void updateStats()
 	{
@@ -137,13 +159,21 @@ public class PetRock
 		}
 
 	}
-	
-	////////// PROBABLY SHOULD RETURN SOMETHING. IDK. NEED TO IMPLEMENT LATER
-	public void saveRock() 
-	{
-		System.out.print("Saving rock...");
-	}
-	
-	
-	
+      
+    // Miscellaneous Methods.
+        @Override
+        public String toString()
+        {
+            String output = "";
+
+            // Setting up output.
+                output += "\nRock Stats.";
+                output += "\n\tName: " + name;
+                output += "\n\tHunger: " + hunger;
+                output += "\n\tBoredom: " + boredom;
+                output += "\n\tEnergy: " + energy;
+                output += "\n\tMood: " + mood;
+
+            return output;
+        }
 }
