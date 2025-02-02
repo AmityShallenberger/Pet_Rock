@@ -44,6 +44,7 @@ public class PetRockMain
 				}
 
 				petRock = gson.fromJson(currJson, PetRock.class);
+				readFile.close();
 			} 
 			
 			catch (Exception e) 
@@ -292,6 +293,7 @@ public class PetRockMain
 			}
 		}
 		
+		input.close();
 		return userInputAsInt;
 	}
 }
