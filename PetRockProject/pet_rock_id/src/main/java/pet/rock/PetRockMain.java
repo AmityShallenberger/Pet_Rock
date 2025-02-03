@@ -9,6 +9,8 @@ import com.google.gson.GsonBuilder;
 
 public class PetRockMain 
 {
+	public static boolean feedOnCooldown = false;
+	public static boolean playOnCooldown = false;
 	public static void main (String [] args) 
 	{
 		//Get file the make settings for gson
@@ -22,9 +24,6 @@ public class PetRockMain
 		int turnNumber = 0;
 		int gameOverCounter = 0;
 		
-		
-		boolean feedOnCooldown = false;
-		boolean playOnCooldown = false;
 		int polishDiminishReturnCurrent = 0;
 		
 		PetRock petRock = new PetRock("", "", 1, 1, 10);
@@ -73,7 +72,7 @@ public class PetRockMain
 			}
 		
 			display(feedOnCooldown, playOnCooldown);
-			int userInput = getUserInput(feedOnCooldown, playOnCooldown);
+			int userInput = getUserInput();
 
 			// Gameplay Logic.
 			// 1. Feed
@@ -247,7 +246,7 @@ public class PetRockMain
 	// Gets input from user. 
 	// Converts it to INT. 
 	// Ensures valid input (1 <= x <= 5).
-	public static int getUserInput(boolean cooldownFEED, boolean cooldownPLAY) 
+	public static int getUserInput() 
 	{
 		Scanner input = new Scanner(System.in);
 		String userInput = ""; 
@@ -275,13 +274,13 @@ public class PetRockMain
 				System.out.println("\nInvalid input: Please enter a valid command.");
 			}
 			
-			else if(cooldownFEED && userInputAsInt == 1)
+			else if(feedOnCooldown && userInputAsInt == 1)
 			{
 				System.out.println("\nYou cannot feed the rock right now.");
 				System.out.println("Enter a different selection.");
 			}
 
-			else if(cooldownPLAY && userInputAsInt == 2)
+			else if(playOnCooldown && userInputAsInt == 2)
 			{
 				System.out.println("\nYou cannot play with the rock right now.");
 				System.out.println("Enter a different selection.");
@@ -293,7 +292,18 @@ public class PetRockMain
 			}
 		}
 		
-		input.close();
 		return userInputAsInt;
+	}
+
+	public static void feed() {
+
+	}
+
+	public static void play() {
+
+	}
+
+	public static void polish() {
+
 	}
 }
