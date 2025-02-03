@@ -163,6 +163,22 @@ public class PetRockMain
 							System.out.println("\nYour rock found a snack! Satiated some Hunger!");
 							petRock.setHunger(petRock.getHunger() - 3);
 							break;
+						case 3: 
+							System.out.println("Your rock got flirted with your rock is now happy!");
+							petRock.setMood("Happy");
+							break;
+						case 4: 
+							System.out.println("Your rock went for a relaxing walk emergy increased!");
+							if(petRock.getEnergy() == 10){
+								break;	
+							}
+							petRock.setEnergy(petRock.getEnergy() + 1);
+							break;
+						case 5: 
+							System.out.println("Your rock had a really nice day");
+							petRock.setBoredom(petRock.getBoredom() - 1);
+							petRock.setEnergy(petRock.getEnergy() + 1);
+							break;
 						default: break;
 					}
 				}
@@ -187,6 +203,12 @@ public class PetRockMain
 							System.out.println("\nYour rock is feeling out of it today. Energy decreased!");
 							petRock.setEnergy(petRock.getEnergy() - 2);
 							break;
+						case 4: 
+							System.out.println("Your rock lost a friend.  Hunger increased and energy decreased");
+							petRock.setEnergy(petRock.getEnergy() - 1);
+							petRock.setHunger(petRock.getHunger() + 1);
+							break;
+				
 						default: break;
 					}
 				}
@@ -206,8 +228,11 @@ public class PetRockMain
 			}
 
 			//After every action turn the current stats into json then write to the current json file
-			try 
-			{
+
+			
+			try {
+
+
 				if (!f.exists()) {
 					f = new File("SavedData.json");
 				} 
@@ -296,4 +321,5 @@ public class PetRockMain
 		input.close();
 		return userInputAsInt;
 	}
+    
 }

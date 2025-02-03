@@ -20,10 +20,10 @@ public class PetRock
     }
 	
     // Get-Methods.
-        public String getName()
-        {
-            return name;
-        }
+    public String getName()
+    {
+        return name;
+    }
 
         public String getMood()
         {
@@ -88,56 +88,60 @@ public class PetRock
         }
 		
 		
-	public void polishRock(int diminishingReturn)
-	{
+
+	
+       
+            
+        
+        // Gameplay Methods.
+         
+
+       
+        public void polishRock(int diminishingReturn) //(int diminishingReturn)
+        {
+                    hunger -= 1; // / (1 + diminishingReturn);
+                    boredom -= 1;
+                    energy += 1;
+                    mood = "Happy";
+                    // Diminshing returns somehow
+        }
+
+        public void updateStats()
+        {
+                    if (hunger < 0) 
+                    {
+                            hunger = 0;
+                    }
+                    if (hunger > 10) 
+                    {
+                            hunger = 10;
+                    }
+
+                    if (boredom < 0) 
+                    {
+                            boredom = 0;
+                    }
+                    if (boredom > 10) 
+                    {
+                            boredom = 10;
+                    }
+        }
 		// EDIT SO SOME OF THESE ONLY FIRE WHEN THE STATS ARE A CERTAIN AMOUNT E.G. WONT BE SAD IF POLISHED ON DIMINISHING RETURN IF CERTAIN STATS ARE HIGH ENOUGH.
 		// done!
-		switch (diminishingReturn) 
-		{
-			case 0:
-				hunger -= 1;
-				boredom -= 1;
-				energy += 1;
-				mood = "Happy"; 
-				break;
-			case 1:
-				hunger -= 1;
-				energy += 1;
-				updateMood();
-				break;
-			case 2:
-				hunger -= 1;
-				updateMood();
-				break;
-			case 3: 
-				updateMood();
-				break;
-			default: break;
-		}
-		
-	}
+	
 
 
-	public void updateStats()
+  
+           
+	////////// PROBABLY SHOULD RETURN SOMETHING. IDK. NEED TO IMPLEMENT LATER
+	public void saveRock() 
 	{
-		if (hunger < 0) 
-		{
-				hunger = 0;
-		}
-		if (hunger > 10) 
-		{
-				hunger = 10;
-		}
-
-		if (boredom < 0) 
-		{
-				boredom = 0;
-		}
-		if (boredom > 10) 
-		{
-				boredom = 10;
-		}
+		System.out.print("Saving rock...");
 	}
+	
+
+	
+	
 
 	public void updateMood()
 	{
