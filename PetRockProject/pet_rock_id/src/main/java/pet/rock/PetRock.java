@@ -1,8 +1,11 @@
 package pet.rock;
 
+import java.io.File;
+import java.util.Scanner;
+import com.google.gson.*;
+
 public class PetRock
 {
-
     private String name;
     private String mood;
     private int hunger;
@@ -113,8 +116,7 @@ public class PetRock
 				updateMood();
 				break;
 			default: break;
-		}
-		
+		}	
 	}
 
 
@@ -168,7 +170,41 @@ public class PetRock
 		}
 
 	}
-      
+
+        public void getSavedData(File f) 
+        {
+            f = new File("SavedData.json");
+
+            if (f.exists()) 
+            {
+                try 
+                {
+                    Scanner readFile = new Scanner(f);
+                    String sData = "";
+                    Gson gson = new Gson();
+
+                    while (readFile.hasNext()) {
+                        sData = sData + readFile.nextLine();
+                    }
+
+                    PetRock p = gson.fromJson(sData, PetRock.class);
+				
+                    readFile.close();
+
+                    this.name = p.getName();
+                    this.mood = p.getMood();
+                    this.hunger = p.getHunger();
+                    this.boredom = p.getBoredom();
+                    this.energy = p.getEnergy();
+                } 
+			
+                catch (Exception e) 
+                {
+                        System.err.println(e);
+                }
+           }
+		}	
+
     // Miscellaneous Methods.
         @Override
         public String toString()

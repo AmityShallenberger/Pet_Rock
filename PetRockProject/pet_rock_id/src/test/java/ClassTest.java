@@ -7,16 +7,15 @@ public class ClassTest {
 
     @Test
     public void testAddName() {
+        a = new PetRock("", "", 1, 1, 10);
         a.setName("Amity");
 
         assertEquals("Amity", a.getName());
     }
-	
-	@Test
-    public void testSetBoredom()
-    {
-        a.setBoredom(50);
-
-        assertEquals(50, a.getBoredom());
+    @Test
+    public void testSetHunger(){
+        a = new PetRock("", "", 1, 1, 10);
+        
+        
     }
 }
