@@ -8,7 +8,7 @@ package pet.rock;
 public class Output {
     
     // TEMPORARY variable to turn output on/off for testing.
-    static boolean lightSwitch = false;
+    static boolean lightSwitch = true;
         
     // METHODS below...
     
