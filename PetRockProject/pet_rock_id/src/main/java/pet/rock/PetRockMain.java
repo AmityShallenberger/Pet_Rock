@@ -53,9 +53,7 @@ public class PetRockMain
 		}
 		else 
 		{
-			System.out.print("No save data found for rock.\n" + 
-                                "A pet rock must be created.\n" + 
-                                "Please enter a name for your rock: ");
+			Output.noSaveData();
 			String newRockName = input.nextLine();
 			petRock.setName(newRockName);
 		}
@@ -67,19 +65,19 @@ public class PetRockMain
 			{
 				gameEnd(f, turnNumber);
 			}
-			
+
 			else 
 			{
 		
-				display(feedOnCooldown, playOnCooldown);
+				Output.display(feedOnCooldown, playOnCooldown);
 				int userInput = getUserInput();
-
+				
 				switch (userInput) 
 				{
 					case 1: // Feed
 						if (petRock.getEnergy() < 1) 
 						{
-							System.out.println("Pet rock does not have enough energy to be fed");
+							Output.noEnergy(0);
 						} 
 						else 
 						{
@@ -92,7 +90,7 @@ public class PetRockMain
 					case 2: // Play
 						if (petRock.getEnergy() < 2) 
 						{
-							System.out.println("Pet rock does not have enough energy to play");
+							Output.noEnergy(1);
 						} 
 						else 
 						{
@@ -114,12 +112,11 @@ public class PetRockMain
 						break;
 					case 5: // Quit
 						shouldLoop = false;
-						System.out.println("\nExiting Application...");
+						Output.gameExit();
 						break;
 					default: break;
-				}
-				
-			
+				}	
+
 				petRock.setHunger(petRock.getHunger() + 1);
 				petRock.setBoredom(petRock.getBoredom() + 1);
 
@@ -225,22 +222,6 @@ public class PetRockMain
 	}
 			
 
-        
-	// Displays user-input menu.
-	// Takes in feed and play cooldowns to determine available options.
-	public static void display(boolean cooldownFEED, boolean cooldownPLAY)
-	{
-		System.out.println("\n--------------------------------------------------------------------------------------------------------");
-		System.out.println( ((cooldownFEED == true) ? "Feeding rock is on cooldown." : 
-														"Press '1' to feed the rock") );
-		System.out.println( ((cooldownPLAY == true) ? "Playing with rock is on cooldown." : 
-														"Press '2' to play with the rock") );
-		System.out.println("Press '3' to polish the rock");
-		System.out.println("Press '4' to display the rock's status");
-		System.out.println("Press '5' to exit the application");
-		System.out.println("--------------------------------------------------------------------------------------------------------");
-	}
-
 	// Gets input from user. 
 	// Converts it to INT. 
 	// Ensures valid input (1 <= x <= 5).
@@ -269,19 +250,17 @@ public class PetRockMain
 			// an integer value that is not between 1 and 5.
 			if(!validIntegerInput || userInputAsInt > 5 || userInputAsInt < 1) 
 			{
-				System.out.println("\nInvalid input: Please enter a valid command.");
+				Output.invalidInput();
 			}
 			
 			else if(feedOnCooldown && userInputAsInt == 1)
 			{
-				System.out.println("\nYou cannot feed the rock right now.");
-				System.out.println("Enter a different selection.");
+				Output.cooldown(0);
 			}
 
 			else if(playOnCooldown && userInputAsInt == 2)
 			{
-				System.out.println("\nYou cannot play with the rock right now.");
-				System.out.println("Enter a different selection.");
+				Output.cooldown(1);
 			}
 
 			else 
@@ -289,9 +268,10 @@ public class PetRockMain
 				validUserInput = true;
 			}
 		}
+
 		return userInputAsInt;
 	}
-	
+
 	public static void feed() {
 
 	}
@@ -310,6 +290,5 @@ public class PetRockMain
 	
 		savedData.delete();	
 	}
-	
 	
 }
