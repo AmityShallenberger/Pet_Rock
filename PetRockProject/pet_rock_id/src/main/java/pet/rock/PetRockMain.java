@@ -78,59 +78,7 @@ public class PetRockMain
 				petRock.setHunger(petRock.getHunger() + 1);
 				petRock.setBoredom(petRock.getBoredom() + 1);
 
-				// Random events.
-				int propertyOfEvent = (int)(Math.random() * 5);
-				int typeOfEvent = (int)(Math.random() * 10);
-
-				// Should have a random event this turn?
-				if ((propertyOfEvent < 3) && (shouldLoop == true) && (gameOver == false))
-				{
-					// Positive
-					if (propertyOfEvent == 0) 
-					{
-						switch (typeOfEvent) 
-						{
-							case 0: 
-								System.out.println("\nYour rock found a shiny pebble! It’s happier now!");
-								petRock.setHunger(petRock.getHunger() - 1);
-								petRock.setBoredom(petRock.getBoredom() - 2);
-								break;
-							case 1: 
-								System.out.println("\nYour rock got some extra sleep! Energy restored!");
-								petRock.setEnergy(10);
-								break;
-							case 2: 
-								System.out.println("\nYour rock found a snack! Satiated some Hunger!");
-								petRock.setHunger(petRock.getHunger() - 3);
-								break;
-							default: break;
-						}
-					}
-					// Negative
-					else 
-					{
-						switch (typeOfEvent) 
-						{
-							case 0: 
-								System.out.println("\nYour rock is scared by a sudden noise! Boredom increased!");
-								petRock.setBoredom(petRock.getBoredom() + 2);
-								break;
-							case 1: 
-								System.out.println("\nYour rock is grumpy today. Hunger increased!");
-								petRock.setHunger(petRock.getHunger() + 2);
-								break;
-							case 2: 
-								System.out.println("\nYour rock smelled something delicious. Hunger increased!");
-								petRock.setHunger(petRock.getHunger() + 2);
-								break;
-							case 3: 
-								System.out.println("\nYour rock is feeling out of it today. Energy decreased!");
-								petRock.setEnergy(petRock.getEnergy() - 2);
-								break;
-							default: break;
-						}
-					}
-				}
+				randomEventGenerator(petRock);
 
 				//petRock.updateStats();
 				petRock.updateMood();
