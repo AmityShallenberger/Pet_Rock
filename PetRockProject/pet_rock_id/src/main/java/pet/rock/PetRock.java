@@ -3,9 +3,6 @@ package pet.rock;
 import java.io.File;
 import java.util.Scanner;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 public class PetRock
 {
     private String name;
@@ -169,8 +166,6 @@ public class PetRock
         f = new File("SavedData.json");
 
         if (f.exists()) {
-            Gson gson = new Gson();
-
 			try 
 			{
 				Scanner readFile = new Scanner(f);

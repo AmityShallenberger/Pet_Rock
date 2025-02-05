@@ -4,8 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.Scanner;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.gson.*;
 
 public class PetRockMain 
 {
@@ -151,8 +150,7 @@ public class PetRockMain
 			{
 				if (!f.exists()) {
 					f = new File("SavedData.json");
-				} 
-
+				}
 					String jsonData = gsonB.setPrettyPrinting().create().toJson(petRock);
 
 					FileWriter fw = new FileWriter(f.getPath());
