@@ -203,7 +203,11 @@ public class PetRock
                         System.err.println(e);
                 }
            }
+<<<<<<< HEAD
 		}	
+=======
+    }
+>>>>>>> 27cadd47bcbe6ad9e46b70e2906555f1e44234f3
 
     // Miscellaneous Methods.
         @Override
