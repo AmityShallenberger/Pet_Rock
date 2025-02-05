@@ -211,6 +211,7 @@ public class PetRockMain
 					System.err.println(e);
 			}
 		}
+		}
 		//input.close();
 	}
 	public static void randomEventGenerator(PetRock petRock){

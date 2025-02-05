@@ -110,9 +110,11 @@ public class Output
                 default:
                     System.out.println("INCORRECT input  in cooldown(int) from Output.java.");
                     break;
-            }
+           
+			
+			}
         }
-
+	}
     public static void RanEventMessage(int propertyOfEvent, int typeOfEvent){
         	// Positive
 		if (propertyOfEvent == 0) 
