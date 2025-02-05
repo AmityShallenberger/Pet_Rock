@@ -59,11 +59,27 @@ public class PetRock
         public void setHunger(int newHunger)
         {
                 hunger = newHunger;
+                if (hunger < 0) 
+                {
+                        hunger = 0;
+                }
+                if (hunger > 10) 
+                {
+                        hunger = 10;
+                }
         }
 
         public void setBoredom(int newBoredom)
         {
                 boredom = newBoredom;
+                if (boredom < 0) 
+                    {
+                            boredom = 0;
+                    }
+                    if (boredom > 10) 
+                    {
+                            boredom = 10;
+                    }
         }
 
         public void setEnergy(int newEnergy)
@@ -106,26 +122,7 @@ public class PetRock
                     // Diminshing returns somehow
         }
 
-        public void updateStats()
-        {
-                    if (hunger < 0) 
-                    {
-                            hunger = 0;
-                    }
-                    if (hunger > 10) 
-                    {
-                            hunger = 10;
-                    }
-
-                    if (boredom < 0) 
-                    {
-                            boredom = 0;
-                    }
-                    if (boredom > 10) 
-                    {
-                            boredom = 10;
-                    }
-        }
+      
 		// EDIT SO SOME OF THESE ONLY FIRE WHEN THE STATS ARE A CERTAIN AMOUNT E.G. WONT BE SAD IF POLISHED ON DIMINISHING RETURN IF CERTAIN STATS ARE HIGH ENOUGH.
 		// done!
 	

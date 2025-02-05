@@ -9,6 +9,9 @@ import com.google.gson.GsonBuilder;
 
 public class PetRockMain 
 {
+	private static boolean shouldLoop = true;
+	private static boolean gameOver = false;
+	
 	public static void main (String [] args) 
 	{
 		//Get file the make settings for gson
@@ -17,8 +20,7 @@ public class PetRockMain
 		
 		Scanner input = new Scanner(System.in);
 		
-		boolean shouldLoop = true;
-		boolean gameOver = false;
+		
 		int turnNumber = 0;
 		int gameOverCounter = 0;
 		
@@ -139,7 +141,48 @@ public class PetRockMain
 			petRock.setBoredom(petRock.getBoredom() + 1);
 
 			// Random events.
-			int propertyOfEvent = (int)(Math.random() * 5);
+			randomEventGenerator(petRock);
+		
+            petRock.updateMood();
+                        
+			turnNumber += 1;
+			if (petRock.getEnergy() == 0)
+			{
+				gameOverCounter++;
+			}
+			else 
+			{
+				gameOverCounter = 0;
+			}
+
+			//After every action turn the current stats into json then write to the current json file
+
+			
+			try {
+
+
+				if (!f.exists()) {
+					f = new File("SavedData.json");
+				} 
+
+				String jsonData = gsonB.setPrettyPrinting().create().toJson(petRock);
+
+				FileWriter fw = new FileWriter(f.getPath());
+
+				fw.write(jsonData);	
+				fw.close();
+
+			} 
+			
+			catch (Exception e) 
+			{
+					System.err.println(e);
+			}
+		}
+		input.close();
+	}
+	public static void randomEventGenerator(PetRock petRock){
+		int propertyOfEvent = (int)(Math.random() * 5);
 			int typeOfEvent = (int)(Math.random() * 10);
 
 			// Should have a random event this turn?
@@ -213,46 +256,7 @@ public class PetRockMain
 					}
 				}
 			}
-
-			petRock.updateStats();
-            petRock.updateMood();
-                        
-			turnNumber += 1;
-			if (petRock.getEnergy() == 0)
-			{
-				gameOverCounter++;
-			}
-			else 
-			{
-				gameOverCounter = 0;
-			}
-
-			//After every action turn the current stats into json then write to the current json file
-
-			
-			try {
-
-
-				if (!f.exists()) {
-					f = new File("SavedData.json");
-				} 
-
-				String jsonData = gsonB.setPrettyPrinting().create().toJson(petRock);
-
-				FileWriter fw = new FileWriter(f.getPath());
-
-				fw.write(jsonData);	
-				fw.close();
-
-			} 
-			
-			catch (Exception e) 
-			{
-					System.err.println(e);
-			}
-		}
 	}
-
         
 	// Displays user-input menu.
 	// Takes in feed and play cooldowns to determine available options.
@@ -318,7 +322,7 @@ public class PetRockMain
 			}
 		}
 		
-		input.close();
+		//input.close();
 		return userInputAsInt;
 	}
     
