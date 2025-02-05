@@ -14,6 +14,7 @@ public class PetRockMain
 	private static boolean gameOver = false;
 	public static boolean feedOnCooldown = false;
 	public static boolean playOnCooldown = false;
+	public static int polishDiminishReturnCurrent = 0;
 
 	public static void main (String [] args) 
 	{
@@ -23,36 +24,14 @@ public class PetRockMain
 		
 		Scanner input = new Scanner(System.in);
 		
-		
 		int turnNumber = 0;
 		int gameOverCounter = 0;
-		
-		int polishDiminishReturnCurrent = 0;
 		
 		PetRock petRock = new PetRock("", "", 1, 1, 10);
                 
 		if (f.exists()) 
 		{
-			Gson gson = new Gson();
-
-			try 
-			{
-				Scanner readFile = new Scanner(f);
-				String currJson = "";
-
-				while (readFile.hasNext()) 
-				{
-					currJson = currJson + readFile.nextLine();
-				}
-
-				petRock = gson.fromJson(currJson, PetRock.class);
-				readFile.close();
-			} 
-			
-			catch (Exception e) 
-			{
-				System.err.println(e);
-			}
+			petRock.getSavedData(f);
 		}
 		else 
 		{
@@ -365,19 +344,44 @@ public class PetRockMain
 		return userInputAsInt;
 	}
     
+    public static void feed(PetRock petRock) {
+        if (petRock.getEnergy() < 1) 
+        {
+            System.out.println("Pet rock does not have enough energy to be fed");
+        } 
+        
+        else 
+        {
+            petRock.feedRock();
+            feedOnCooldown = true;
+        }
+        
+        playOnCooldown = false;
+        polishDiminishReturnCurrent = 0;
+    }
 
+    public static void play(PetRock petRock) {
+        if (petRock.getEnergy() < 2) 
+        {
+            System.out.println("Pet rock does not have enough energy to play");
+        } 
+        
+        else 
+        {
+            petRock.playRock();
+            playOnCooldown = true;
+        }
+        
+        feedOnCooldown = false;
+        polishDiminishReturnCurrent = 0;
+    }
 
-	public static void feed() {
-
-	}
-
-	public static void play() {
-
-	}
-
-	public static void polish() {
-
-	}
+    public static void polish(PetRock petRock) {
+        petRock.polishRock(polishDiminishReturnCurrent);
+        polishDiminishReturnCurrent += 1;
+        feedOnCooldown = false;
+        playOnCooldown = false;
+    }
 	
 	public static void gameEnd(File savedData, int numTurns) 
 	{
