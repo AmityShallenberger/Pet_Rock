@@ -2,7 +2,7 @@ import pet.rock.*;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
-public class tests {
+public class ClassTest {
     PetRock a = new PetRock("", "", 1, 1, 10);
 
     @Test
