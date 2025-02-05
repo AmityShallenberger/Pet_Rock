@@ -137,6 +137,15 @@ public class PetRock
 		{
 				boredom = 10;
 		}
+		
+		if (energy < 0) 
+		{
+				energy = 0;
+		}
+		if (energy > 10) 
+		{
+				energy = 10;
+		}
 	}
 
 	public void updateMood()

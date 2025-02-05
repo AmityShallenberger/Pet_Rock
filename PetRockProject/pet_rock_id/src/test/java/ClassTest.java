@@ -11,4 +11,12 @@ public class ClassTest {
 
         assertEquals("Amity", a.getName());
     }
+	
+	@Test
+    public void testSetBoredom()
+    {
+        a.setBoredom(50);
+
+        assertEquals(50, a.getBoredom());
+    }
 }
