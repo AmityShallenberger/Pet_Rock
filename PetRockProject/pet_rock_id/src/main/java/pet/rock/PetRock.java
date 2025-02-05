@@ -2,6 +2,7 @@ package pet.rock;
 
 import java.io.File;
 import java.util.Scanner;
+import com.google.gson.*;
 
 public class PetRock
 {
@@ -169,14 +170,22 @@ public class PetRock
 			try 
 			{
 				Scanner readFile = new Scanner(f);
+                String sData = "";
+                Gson gson = new Gson();
 
-                name = readFile.nextLine();
-                mood = readFile.nextLine();
-                hunger = readFile.nextInt();
-                boredom = readFile.nextInt();
-                energy = readFile.nextInt();
+                while (readFile.hasNext()) {
+                    sData = sData + readFile.nextLine();
+                }
+
+                PetRock p = gson.fromJson(sData, PetRock.class);
 				
 				readFile.close();
+
+                this.name = p.getName();
+                this.mood = p.getMood();
+                this.hunger = p.getHunger();
+                this.boredom = p.getBoredom();
+                this.energy = p.getEnergy();
 			} 
 			
 			catch (Exception e) 
