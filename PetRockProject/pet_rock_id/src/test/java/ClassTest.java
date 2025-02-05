@@ -16,6 +16,5 @@ public class ClassTest {
     public void testSetHunger(){
         a = new PetRock("", "", 1, 1, 10);
         
-        
     }
 }
