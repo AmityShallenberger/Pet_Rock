@@ -56,9 +56,7 @@ public class PetRockMain
 		}
 		else 
 		{
-			System.out.print("No save data found for rock.\n" + 
-                                "A pet rock must be created.\n" + 
-                                "Please enter a name for your rock: ");
+			Output.noSaveData();
 			String newRockName = input.nextLine();
 			petRock.setName(newRockName);
 		}
@@ -68,13 +66,13 @@ public class PetRockMain
 			
 			if ( (petRock.getHunger() == 10) || (petRock.getBoredom() == 10) || ( (petRock.getEnergy() == 0) && (gameOverCounter >= 3) ) ) 
 			{
-				System.out.println("Your rock has rolled away in protest! Game over. You lasted " + turnNumber + " turns!");
+				Output.gameEnd(turnNumber);
 				gameOver = true;
 				f.delete(); // delete saved data if game over
 				break;
 			}
 		
-			display(feedOnCooldown, playOnCooldown);
+			Output.display(feedOnCooldown, playOnCooldown);
 			int userInput = getUserInput();
 
 			// Gameplay Logic.
@@ -83,7 +81,7 @@ public class PetRockMain
 			{
 				if (petRock.getEnergy() < 1) 
 				{
-					System.out.println("Pet rock does not have enough energy to be fed");
+					Output.noEnergy(0);
 				} 
 				
 				else 
@@ -101,7 +99,7 @@ public class PetRockMain
 			{
 					if (petRock.getEnergy() < 2) 
 					{
-						System.out.println("Pet rock does not have enough energy to play");
+						Output.noEnergy(1);
 					} 
 					
 					else 
@@ -134,16 +132,68 @@ public class PetRockMain
 			else
 			{
 				shouldLoop = false;
-				System.out.println("\nExiting Application...");
+				Output.gameExit();
 			}
 
 			petRock.setHunger(petRock.getHunger() + 1);
 			petRock.setBoredom(petRock.getBoredom() + 1);
 
 			// Random events.
-			randomEventGenerator(petRock);
-		
-            petRock.updateMood();
+			int propertyOfEvent = (int)(Math.random() * 5);
+			int typeOfEvent = (int)(Math.random() * 10);
+
+			// Should have a random event this turn?
+			if ((propertyOfEvent < 3) && (shouldLoop == true) && (gameOver == false))
+			{
+				// Positive
+				if (propertyOfEvent == 0) 
+				{
+					switch (typeOfEvent) 
+					{
+						case 0: 
+							System.out.println("\nYour rock found a shiny pebble! It’s happier now!");
+							petRock.setHunger(petRock.getHunger() - 1);
+							petRock.setBoredom(petRock.getBoredom() - 2);
+							break;
+						case 1: 
+							System.out.println("\nYour rock got some extra sleep! Energy restored!");
+							petRock.setEnergy(10);
+							break;
+						case 2: 
+							System.out.println("\nYour rock found a snack! Satiated some Hunger!");
+							petRock.setHunger(petRock.getHunger() - 3);
+							break;
+						default: break;
+					}
+				}
+				// Negative
+				else 
+				{
+					switch (typeOfEvent) 
+					{
+						case 0: 
+							System.out.println("\nYour rock is scared by a sudden noise! Boredom increased!");
+							petRock.setBoredom(petRock.getBoredom() + 2);
+							break;
+						case 1: 
+							System.out.println("\nYour rock is grumpy today. Hunger increased!");
+							petRock.setHunger(petRock.getHunger() + 2);
+							break;
+						case 2: 
+							System.out.println("\nYour rock smelled something delicious. Hunger increased!");
+							petRock.setHunger(petRock.getHunger() + 2);
+							break;
+						case 3: 
+							System.out.println("\nYour rock is feeling out of it today. Energy decreased!");
+							petRock.setEnergy(petRock.getEnergy() - 2);
+							break;
+						default: break;
+					}
+				}
+			}
+
+			//petRock.updateStats();
+                        petRock.updateMood();
                         
 			turnNumber += 1;
 			if (petRock.getEnergy() == 0)
@@ -303,19 +353,17 @@ public class PetRockMain
 			// an integer value that is not between 1 and 5.
 			if(!validIntegerInput || userInputAsInt > 5 || userInputAsInt < 1) 
 			{
-				System.out.println("\nInvalid input: Please enter a valid command.");
+				Output.invalidInput();
 			}
 			
 			else if(feedOnCooldown && userInputAsInt == 1)
 			{
-				System.out.println("\nYou cannot feed the rock right now.");
-				System.out.println("Enter a different selection.");
+				Output.cooldown(0);
 			}
 
 			else if(playOnCooldown && userInputAsInt == 2)
 			{
-				System.out.println("\nYou cannot play with the rock right now.");
-				System.out.println("Enter a different selection.");
+				Output.cooldown(1);
 			}
 
 			else 
