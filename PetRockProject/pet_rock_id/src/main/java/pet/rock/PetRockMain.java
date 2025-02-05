@@ -109,9 +109,9 @@ public class PetRockMain
                 }
 				
             }
-			
-        }        //input.close();
 		
+        }
+	input.close();	
     }
     
     public static void randomEventGenerator(PetRock petRock)
