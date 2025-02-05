@@ -185,7 +185,7 @@ public class PetRockMain
 		int propertyOfEvent = (int)(Math.random() * 5);
 			int typeOfEvent = (int)(Math.random() * 10);
 
-			// Should have a random event this turn?
+			
 			if ((propertyOfEvent < 3) && (shouldLoop == true) && (gameOver == false))
 			{
 				// Positive
@@ -194,36 +194,37 @@ public class PetRockMain
 					switch (typeOfEvent) 
 					{
 						case 0: 
-							System.out.println("\nYour rock found a shiny pebble! It’s happier now!");
+							//System.out.println("\nYour rock found a shiny pebble! It’s happier now!");
 							petRock.setHunger(petRock.getHunger() - 1);
 							petRock.setBoredom(petRock.getBoredom() - 2);
 							break;
 						case 1: 
-							System.out.println("\nYour rock got some extra sleep! Energy restored!");
+							//System.out.println("\nYour rock got some extra sleep! Energy restored!");
 							petRock.setEnergy(10);
 							break;
 						case 2: 
-							System.out.println("\nYour rock found a snack! Satiated some Hunger!");
+							//System.out.println("\nYour rock found a snack! Satiated some Hunger!");
 							petRock.setHunger(petRock.getHunger() - 3);
 							break;
 						case 3: 
-							System.out.println("Your rock got flirted with your rock is now happy!");
-							petRock.setMood("Happy");
+							//System.out.println("Your rock got flirted with your rock is feeling energized");
+							petRock.setEnergy(10);
 							break;
 						case 4: 
-							System.out.println("Your rock went for a relaxing walk emergy increased!");
+							//System.out.println("Your rock went for a relaxing walk emergy increased!");
 							if(petRock.getEnergy() == 10){
 								break;	
 							}
 							petRock.setEnergy(petRock.getEnergy() + 1);
 							break;
 						case 5: 
-							System.out.println("Your rock had a really nice day");
+							//System.out.println("Your rock had a really nice day");
 							petRock.setBoredom(petRock.getBoredom() - 1);
 							petRock.setEnergy(petRock.getEnergy() + 1);
 							break;
 						default: break;
 					}
+
 				}
 				// Negative
 				else 
@@ -231,23 +232,23 @@ public class PetRockMain
 					switch (typeOfEvent) 
 					{
 						case 0: 
-							System.out.println("\nYour rock is scared by a sudden noise! Boredom increased!");
+							//System.out.println("\nYour rock is scared by a sudden noise! Boredom increased!");
 							petRock.setBoredom(petRock.getBoredom() + 2);
 							break;
 						case 1: 
-							System.out.println("\nYour rock is grumpy today. Hunger increased!");
+							//System.out.println("\nYour rock is grumpy today. Hunger increased!");
 							petRock.setHunger(petRock.getHunger() + 2);
 							break;
 						case 2: 
-							System.out.println("\nYour rock smelled something delicious. Hunger increased!");
+							//System.out.println("\nYour rock smelled something delicious. Hunger increased!");
 							petRock.setHunger(petRock.getHunger() + 2);
 							break;
 						case 3: 
-							System.out.println("\nYour rock is feeling out of it today. Energy decreased!");
+							//System.out.println("\nYour rock is feeling out of it today. Energy decreased!");
 							petRock.setEnergy(petRock.getEnergy() - 2);
 							break;
 						case 4: 
-							System.out.println("Your rock lost a friend.  Hunger increased and energy decreased");
+							//System.out.println("Your rock lost a friend.  Hunger increased and energy decreased");
 							petRock.setEnergy(petRock.getEnergy() - 1);
 							petRock.setHunger(petRock.getHunger() + 1);
 							break;
@@ -255,10 +256,11 @@ public class PetRockMain
 						default: break;
 					}
 				}
-			}
+				Output.RanEventMessage(propertyOfEvent,typeOfEvent);
+		}
 	}
-        
-	// Displays user-input menu.
+						
+				
 	// Takes in feed and play cooldowns to determine available options.
 	public static void display(boolean cooldownFEED, boolean cooldownPLAY)
 	{
