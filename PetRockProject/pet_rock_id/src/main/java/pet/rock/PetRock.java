@@ -1,8 +1,13 @@
 package pet.rock;
 
+import java.io.File;
+import java.util.Scanner;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 public class PetRock
 {
-
     private String name;
     private String mood;
     private int hunger;
@@ -20,10 +25,10 @@ public class PetRock
     }
 	
     // Get-Methods.
-    public String getName()
-    {
-        return name;
-    }
+        public String getName()
+        {
+            return name;
+        }
 
         public String getMood()
         {
@@ -59,27 +64,11 @@ public class PetRock
         public void setHunger(int newHunger)
         {
                 hunger = newHunger;
-                if (hunger < 0) 
-                {
-                        hunger = 0;
-                }
-                if (hunger > 10) 
-                {
-                        hunger = 10;
-                }
         }
 
         public void setBoredom(int newBoredom)
         {
                 boredom = newBoredom;
-                if (boredom < 0) 
-                    {
-                            boredom = 0;
-                    }
-                    if (boredom > 10) 
-                    {
-                            boredom = 10;
-                    }
         }
 
         public void setEnergy(int newEnergy)
@@ -104,41 +93,56 @@ public class PetRock
         }
 		
 		
-
-	
-       
-            
-        
-        // Gameplay Methods.
-         
-
-       
-        public void polishRock(int diminishingReturn) //(int diminishingReturn)
-        {
-                    hunger -= 1; // / (1 + diminishingReturn);
-                    boredom -= 1;
-                    energy += 1;
-                    mood = "Happy";
-                    // Diminshing returns somehow
-        }
-
-      
+	public void polishRock(int diminishingReturn)
+	{
 		// EDIT SO SOME OF THESE ONLY FIRE WHEN THE STATS ARE A CERTAIN AMOUNT E.G. WONT BE SAD IF POLISHED ON DIMINISHING RETURN IF CERTAIN STATS ARE HIGH ENOUGH.
 		// done!
-	
-
-
-  
-           
-	////////// PROBABLY SHOULD RETURN SOMETHING. IDK. NEED TO IMPLEMENT LATER
-	public void saveRock() 
-	{
-		System.out.print("Saving rock...");
+		switch (diminishingReturn) 
+		{
+			case 0:
+				hunger -= 1;
+				boredom -= 1;
+				energy += 1;
+				mood = "Happy"; 
+				break;
+			case 1:
+				hunger -= 1;
+				energy += 1;
+				updateMood();
+				break;
+			case 2:
+				hunger -= 1;
+				updateMood();
+				break;
+			case 3: 
+				updateMood();
+				break;
+			default: break;
+		}
+		
 	}
-	
 
-	
-	
+
+	public void updateStats()
+	{
+		if (hunger < 0) 
+		{
+				hunger = 0;
+		}
+		if (hunger > 10) 
+		{
+				hunger = 10;
+		}
+
+		if (boredom < 0) 
+		{
+				boredom = 0;
+		}
+		if (boredom > 10) 
+		{
+				boredom = 10;
+		}
+	}
 
 	public void updateMood()
 	{
@@ -160,7 +164,33 @@ public class PetRock
 		}
 
 	}
-      
+
+    public void getSavedData(File f) {
+        f = new File("SavedData.json");
+
+        if (f.exists()) {
+            Gson gson = new Gson();
+
+			try 
+			{
+				Scanner readFile = new Scanner(f);
+
+                name = readFile.nextLine();
+                mood = readFile.nextLine();
+                hunger = readFile.nextInt();
+                boredom = readFile.nextInt();
+                energy = readFile.nextInt();
+				
+				readFile.close();
+			} 
+			
+			catch (Exception e) 
+			{
+				System.err.println(e);
+			}
+        }
+    }
+
     // Miscellaneous Methods.
         @Override
         public String toString()
