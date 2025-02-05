@@ -4,8 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.Scanner;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.gson.*;
 
 public class PetRockMain 
 {
@@ -57,36 +56,13 @@ public class PetRockMain
 				switch (userInput) 
 				{
 					case 1: // Feed
-						if (petRock.getEnergy() < 1) 
-						{
-							Output.noEnergy(0);
-						} 
-						else 
-						{
-							petRock.feedRock();
-							feedOnCooldown = true;
-						}
-						playOnCooldown = false;
-						polishDiminishReturnCurrent = 0;
+						feed(petRock);
 						break;
 					case 2: // Play
-						if (petRock.getEnergy() < 2) 
-						{
-							Output.noEnergy(1);
-						} 
-						else 
-						{
-							petRock.playRock();
-							playOnCooldown = true;
-						}
-						feedOnCooldown = false;
-						polishDiminishReturnCurrent = 0;
+						play(petRock);
 						break;
 					case 3: // Polish
-						petRock.polishRock(polishDiminishReturnCurrent);
-						polishDiminishReturnCurrent += 1;
-						feedOnCooldown = false;
-						playOnCooldown = false;
+						polish(petRock);
 						break;
 					case 4: // CheckStats
 						System.out.println(petRock);
@@ -174,8 +150,7 @@ public class PetRockMain
 			{
 				if (!f.exists()) {
 					f = new File("SavedData.json");
-				} 
-
+				}
 					String jsonData = gsonB.setPrettyPrinting().create().toJson(petRock);
 
 					FileWriter fw = new FileWriter(f.getPath());
