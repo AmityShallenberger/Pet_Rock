@@ -294,7 +294,9 @@ public class PetRockMain
                     System.err.println(e);
                 }
             }
-        }        //input.close();
+        }
+        
+        input.close(); // closes the Scanner.
     }
     
     public static void randomEventGenerator(PetRock petRock)
