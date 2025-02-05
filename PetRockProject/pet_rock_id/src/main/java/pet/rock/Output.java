@@ -23,13 +23,13 @@ public class Output
         }
     }
     
-    // Used in the method "gameEndCheck()" in PetRockMain.java
+    // Used in the method "gameEnd()" in PetRockMain.java
     // Hunger, energy, or boredom exceed their thresholds.
     public static void gameEnd(int turnNo)
     {
         if(lightSwitch) {
-            System.out.println("Your rock has rolled away in protest!" + 
-                    " Game over. You lasted " + turnNo + " turns!");
+            System.out.println("\nYour rock has rolled away in protest!" + 
+                    " Game over.\nYou lasted " + turnNo + " turns!");
         }
     }
     
@@ -112,72 +112,61 @@ public class Output
                     break;
            
 			
-			}
+            }
         }
-	}
-    public static void RanEventMessage(int propertyOfEvent, int typeOfEvent){
-        	// Positive
-		if (propertyOfEvent == 0) 
-		{
-			switch (typeOfEvent) 
-			{
-				case 0: 
-					System.out.println("\nYour rock found a shiny pebble! It’s happier now!");
-						
-					break;
-				case 1: 
-					System.out.println("\nYour rock got some extra sleep! Energy restored!");
-						
-					break;
-				case 2: 
-				    System.out.println("\nYour rock found a snack! Satiated some Hunger!");
-							
-					break;
-				case 3: 
-					System.out.println("Your rock got flirted with your rock is feeling energized");
-						
-					break;
-				case 4: 
-					System.out.println("Your rock went for a relaxing walk emergy increased!");
-						
-					break;
-				case 5: 
-					System.out.println("Your rock had a really nice day");
-							
-					break;
-				default: break;
-			}
-
-		}
-				// Negative
-		else 
-		{
-			switch (typeOfEvent) 
-			{
-				case 0: 
-                	System.out.println("\nYour rock is scared by a sudden noise! Boredom increased!");
-						
-					break;
-				case 1: 
-					System.out.println("\nYour rock is grumpy today. Hunger increased!");
-					
-					break;
-				case 2: 
-					System.out.println("\nYour rock smelled something delicious. Hunger increased!");
-						
-					break;
-				case 3: 
-					System.out.println("\nYour rock is feeling out of it today. Energy decreased!");
-						
-					break;
-				case 4: 
-					System.out.println("Your rock lost a friend.  Hunger increased and energy decreased");
-						
-					break;
-				
-				default: break;
-			}
-		}
+    }
+    
+    public static void RanEventMessage(int propertyOfEvent, int typeOfEvent)
+    {
+        // Positive
+        if (propertyOfEvent == 0) 
+        {
+                switch (typeOfEvent) 
+                {
+                        case 0: 
+                                System.out.println("\nYour rock found a shiny pebble! It’s happier now!");
+                                break;
+                        case 1: 
+                                System.out.println("\nYour rock got some extra sleep! Energy restored!");
+                                break;
+                        case 2: 
+                                System.out.println("\nYour rock found a snack! Satiated some Hunger!");
+                                break;
+                        case 3: 
+                                System.out.println("Your rock got flirted with your rock is feeling energized");
+                                break;
+                        case 4: 
+                                System.out.println("Your rock went for a relaxing walk emergy increased!");
+                                break;
+                        case 5: 
+                                System.out.println("Your rock had a really nice day");
+                                break;
+                        default: break;
+                }
+        }
+        // Negative
+        else 
+        {
+                switch (typeOfEvent) 
+                {
+                        case 0: 
+                                System.out.println("\nYour rock is scared by a sudden noise! Boredom increased!");
+                                break;
+                        case 1: 
+                                System.out.println("\nYour rock is grumpy today. Hunger increased!");
+                                break;
+                        case 2: 
+                                System.out.println("\nYour rock smelled something delicious. Hunger increased!");
+                                break;
+                        case 3: 
+                                System.out.println("\nYour rock is feeling out of it today. Energy decreased!");
+                                break;
+                        case 4: 
+                                System.out.println("Your rock lost a friend.  Hunger increased and energy decreased");
+                                break;
+                        default: break;
+                }
+        }
 
     }
 }

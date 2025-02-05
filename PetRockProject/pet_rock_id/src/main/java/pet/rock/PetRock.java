@@ -116,8 +116,7 @@ public class PetRock
 				updateMood();
 				break;
 			default: break;
-		}
-		
+		}	
 	}
 
 
@@ -163,36 +162,38 @@ public class PetRock
 
 	}
 
-    public void getSavedData(File f) {
-        f = new File("SavedData.json");
+        public void getSavedData(File f) 
+        {
+            f = new File("SavedData.json");
 
-        if (f.exists()) {
-			try 
-			{
-				Scanner readFile = new Scanner(f);
-                String sData = "";
-                Gson gson = new Gson();
+            if (f.exists()) 
+            {
+                try 
+                {
+                    Scanner readFile = new Scanner(f);
+                    String sData = "";
+                    Gson gson = new Gson();
 
-                while (readFile.hasNext()) {
-                    sData = sData + readFile.nextLine();
-                }
+                    while (readFile.hasNext()) {
+                        sData = sData + readFile.nextLine();
+                    }
 
-                PetRock p = gson.fromJson(sData, PetRock.class);
+                    PetRock p = gson.fromJson(sData, PetRock.class);
 				
-				readFile.close();
+                    readFile.close();
 
-                this.name = p.getName();
-                this.mood = p.getMood();
-                this.hunger = p.getHunger();
-                this.boredom = p.getBoredom();
-                this.energy = p.getEnergy();
-			} 
+                    this.name = p.getName();
+                    this.mood = p.getMood();
+                    this.hunger = p.getHunger();
+                    this.boredom = p.getBoredom();
+                    this.energy = p.getEnergy();
+                } 
 			
-			catch (Exception e) 
-			{
-				System.err.println(e);
-			}
-        }
+                catch (Exception e) 
+                {
+                        System.err.println(e);
+                }
+           }
     }
 
     // Miscellaneous Methods.
