@@ -1,6 +1,7 @@
 package pet.rock;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.util.Scanner;
 import com.google.gson.*;
 
@@ -202,8 +203,28 @@ public class PetRock
                 {
                         System.err.println(e);
                 }
-           }
+            }
 		}	
+
+        public void makeSavedData(File f, PetRock p) {
+            GsonBuilder gsonB = new GsonBuilder();
+
+            try 
+            {
+                if (!f.exists())
+                    f = new File("SavedData.json");
+                
+                String jsonData = gsonB.setPrettyPrinting().create().toJson(p);
+                FileWriter fw = new FileWriter(f.getPath());
+
+                fw.write(jsonData);	
+                fw.close();
+            } 
+            catch (Exception e) 
+            {
+                System.err.println(e);
+            }
+        }
 
     // Miscellaneous Methods.
         @Override
