@@ -92,7 +92,7 @@ public class PetRockMain
 				
 	public static void doAction(PetRock petRock, int input) 
 	{
-		switch (userInput) 
+		switch (input) 
 		{
 			case 1: // Feed
 				feed(petRock);
