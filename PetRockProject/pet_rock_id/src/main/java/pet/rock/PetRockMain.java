@@ -14,11 +14,10 @@ public class PetRockMain
     public static boolean feedOnCooldown = false;
     public static boolean playOnCooldown = false;
     public static int polishDiminishReturnCurrent = 0;
+    public static File f = new File("SavedData.json");
 
     public static void main (String [] args) 
     {
-        //Get file the make settings for gson
-        File f = new File("SavedData.json");
         GsonBuilder gsonB = new GsonBuilder();
 
         Scanner input = new Scanner(System.in);
@@ -27,17 +26,7 @@ public class PetRockMain
         int gameOverCounter = 0;
 
         PetRock petRock = new PetRock("", "", 1, 1, 10);
-
-        if (f.exists())
-		{
-            petRock.getSavedData(f);
-		}
-        else 
-        {
-            Output.noSaveData();
-            String newRockName = input.nextLine();
-            petRock.setName(newRockName);
-        }
+        rockCreation(petRock, input);
 
         while ((shouldLoop == true) && (gameOver == false)) 
         {
@@ -45,12 +34,12 @@ public class PetRockMain
             
             if ((gameOver) == true)
 			{
-                gameEnd(f, turnNumber);
+                gameEnd(turnNumber);
 			}
             else 
             {
                 Output.display(feedOnCooldown, playOnCooldown);
-                int userInput = getUserInput();
+                int userInput = getUserInput(input);
 
 				doAction(petRock, userInput);
 				
@@ -59,7 +48,6 @@ public class PetRockMain
 
                 randomEventGenerator(petRock);
 				
-
                 petRock.updateStats();
                 petRock.updateMood();
 
@@ -209,9 +197,8 @@ public class PetRockMain
     // Gets input from user. 
     // Converts it to INT. 
     // Ensures valid input (1 <= x <= 5).
-    public static int getUserInput() 
+    public static int getUserInput(Scanner input) 
     {
-        Scanner input = new Scanner(System.in);
         String userInput = ""; 
         int userInputAsInt = 0; 
         boolean validUserInput = false; 
@@ -292,11 +279,24 @@ public class PetRockMain
         feedOnCooldown = false;
         playOnCooldown = false;
     }
+
+    public static void rockCreation(PetRock petRock, Scanner input) {
+        if (f.exists())
+		{
+            petRock.getSavedData(f);
+		}
+        else 
+        {
+            Output.noSaveData();
+            String newRockName = input.nextLine();
+            petRock.setName(newRockName);
+        }
+    }
 	
-    public static void gameEnd(File savedData, int numTurns) 
+    public static void gameEnd(int numTurns) 
     {
         Output.gameEnd(numTurns);
-        savedData.delete();	
+        f.delete();	
     }
 	
 }
