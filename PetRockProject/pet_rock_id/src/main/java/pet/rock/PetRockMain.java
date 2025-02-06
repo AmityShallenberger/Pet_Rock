@@ -44,53 +44,30 @@ public class PetRockMain
             gameOver = (gameEndCheck(petRock, gameOverCounter));
             
             if ((gameOver) == true)
+			{
                 gameEnd(f, turnNumber);
+			}
             else 
             {
                 Output.display(feedOnCooldown, playOnCooldown);
                 int userInput = getUserInput();
 
-                switch (userInput) 
-                {
-                    case 1: // Feed
-                        feed(petRock);
-                        break;
-                    case 2: // Play
-                        play(petRock);
-                        break;
-                    case 3: // Polish
-                        polish(petRock);
-                        break;
-                    case 4: // CheckStats
-                        System.out.println(petRock);
-                        petRock.setEnergy(petRock.getEnergy() + 1);
-                        break;
-                    case 5: // Quit
-                        shouldLoop = false;
-                        Output.gameExit();
-                        break;
-                    default: break;
-                }	
-
+				doAction(petRock, userInput);
+				
                 petRock.setHunger(petRock.getHunger() + 1);
                 petRock.setBoredom(petRock.getBoredom() + 1);
 
                 randomEventGenerator(petRock);
+				
 
                 petRock.updateStats();
                 petRock.updateMood();
 
                 turnNumber += 1;
                 
-                if (petRock.getEnergy() == 0)
-                {
-                    gameOverCounter++;
-                }
-                else 
-                {
-                    gameOverCounter = 0;
-                }
-
+				gameOverCounter = incrementGameOverCounter(petRock, gameOverCounter);
+                
+				
                 //After every action turn the current stats into json then write to the current json file
                 try 
                 {
@@ -114,6 +91,42 @@ public class PetRockMain
 	input.close();	
     }
     
+	
+	public static int incrementGameOverCounter(PetRock petRock, int currentCounter) 
+	{
+		int returnCounter = 0;
+		if (petRock.getEnergy() == 0)
+		{
+			returnCounter = currentCounter + 1;
+		}
+		return returnCounter;
+	}
+				
+	public static void doAction(PetRock petRock, int input) 
+	{
+		switch (userInput) 
+		{
+			case 1: // Feed
+				feed(petRock);
+				break;
+			case 2: // Play
+				play(petRock);
+				break;
+			case 3: // Polish
+				polish(petRock);
+				break;
+			case 4: // CheckStats
+				System.out.println(petRock);
+				petRock.setEnergy(petRock.getEnergy() + 1);
+				break;
+			case 5: // Quit
+				shouldLoop = false;
+				Output.gameExit();
+				break;
+			default: break;
+		}	
+	}
+				
     public static void randomEventGenerator(PetRock petRock)
     {
         int propertyOfEvent = (int)(Math.random() * 5);
@@ -155,7 +168,6 @@ public class PetRockMain
 					default: break;
 				}
             }
-            
             // Negative
             else 
             {
