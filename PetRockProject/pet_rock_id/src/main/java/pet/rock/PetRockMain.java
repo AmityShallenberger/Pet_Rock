@@ -14,11 +14,10 @@ public class PetRockMain
     public static boolean feedOnCooldown = false;
     public static boolean playOnCooldown = false;
     public static int polishDiminishReturnCurrent = 0;
+    public static File f = new File("SavedData.json");
 
     public static void main (String [] args) 
     {
-        //Get file the make settings for gson
-        File f = new File("SavedData.json");
         GsonBuilder gsonB = new GsonBuilder();
 
         Scanner input = new Scanner(System.in);
@@ -27,70 +26,36 @@ public class PetRockMain
         int gameOverCounter = 0;
 
         PetRock petRock = new PetRock("", "", 1, 1, 10);
-
-        if (f.exists())
-		{
-            petRock.getSavedData(f);
-		}
-        else 
-        {
-            Output.noSaveData();
-            String newRockName = input.nextLine();
-            petRock.setName(newRockName);
-        }
+        rockCreation(petRock, input);
 
         while ((shouldLoop == true) && (gameOver == false)) 
         {
             gameOver = (gameEndCheck(petRock, gameOverCounter));
             
             if ((gameOver) == true)
-                gameEnd(f, turnNumber);
+			{
+                gameEnd(turnNumber);
+			}
             else 
             {
                 Output.display(feedOnCooldown, playOnCooldown);
-                int userInput = getUserInput();
+                int userInput = getUserInput(input);
 
-                switch (userInput) 
-                {
-                    case 1: // Feed
-                        feed(petRock);
-                        break;
-                    case 2: // Play
-                        play(petRock);
-                        break;
-                    case 3: // Polish
-                        polish(petRock);
-                        break;
-                    case 4: // CheckStats
-                        System.out.println(petRock);
-                        petRock.setEnergy(petRock.getEnergy() + 1);
-                        break;
-                    case 5: // Quit
-                        shouldLoop = false;
-                        Output.gameExit();
-                        break;
-                    default: break;
-                }	
-
+				doAction(petRock, userInput);
+				
                 petRock.setHunger(petRock.getHunger() + 1);
                 petRock.setBoredom(petRock.getBoredom() + 1);
 
                 randomEventGenerator(petRock);
-
+				
                 petRock.updateStats();
                 petRock.updateMood();
 
                 turnNumber += 1;
                 
-                if (petRock.getEnergy() == 0)
-                {
-                    gameOverCounter++;
-                }
-                else 
-                {
-                    gameOverCounter = 0;
-                }
-
+				gameOverCounter = incrementGameOverCounter(petRock, gameOverCounter);
+                
+				
                 //After every action turn the current stats into json then write to the current json file
                 try 
                 {
@@ -113,8 +78,43 @@ public class PetRockMain
         }
 	input.close();	
     }
-    
-    // Used on line ___ to create a random event.
+	
+	public static int incrementGameOverCounter(PetRock petRock, int currentCounter) 
+	{
+		int returnCounter = 0;
+		if (petRock.getEnergy() == 0)
+		{
+			returnCounter = currentCounter + 1;
+		}
+		return returnCounter;
+	}
+				
+	public static void doAction(PetRock petRock, int input) 
+	{
+		switch (input) 
+		{
+			case 1: // Feed
+				feed(petRock);
+				break;
+			case 2: // Play
+				play(petRock);
+				break;
+			case 3: // Polish
+				polish(petRock);
+				break;
+			case 4: // CheckStats
+				System.out.println(petRock);
+				petRock.setEnergy(petRock.getEnergy() + 1);
+				break;
+			case 5: // Quit
+				shouldLoop = false;
+				Output.gameExit();
+				break;
+			default: break;
+		}	
+	}
+  
+    // Used on line ___ to create a random event.				
     public static void randomEventGenerator(PetRock petRock)
     {
         int propertyOfEvent = (int)(Math.random() * 5);
@@ -156,7 +156,6 @@ public class PetRockMain
 					default: break;
 				}
             }
-            
             // Negative
             else 
             {
@@ -198,9 +197,8 @@ public class PetRockMain
 
     // Used on line ____ to gather an input from the user. 
     // Ensures valid input (1 <= x <= 5).
-    public static int getUserInput() 
+    public static int getUserInput(Scanner input) 
     {
-        Scanner input = new Scanner(System.in);
         String userInput = ""; 
         int userInputAsInt = 0; 
         boolean validUserInput = false; 
@@ -285,11 +283,23 @@ public class PetRockMain
         playOnCooldown = false;
     }
 
-    // Used on line ____ to end the game.... consensually.
-    public static void gameEnd(File savedData, int numTurns) 
+    public static void rockCreation(PetRock petRock, Scanner input) {
+        if (f.exists())
+		{
+            petRock.getSavedData(f);
+		}
+        else 
+        {
+            Output.noSaveData();
+            String newRockName = input.nextLine();
+            petRock.setName(newRockName);
+        }
+    }
+	  // Used on line ____ to end the game.... consensually.
+    public static void gameEnd(int numTurns) 
     {
         Output.gameEnd(numTurns);
-        savedData.delete();	
+        f.delete();	
     }
 	
 }
