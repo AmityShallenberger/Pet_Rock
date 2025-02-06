@@ -78,7 +78,6 @@ public class PetRockMain
         }
 	input.close();	
     }
-    
 	
 	public static int incrementGameOverCounter(PetRock petRock, int currentCounter) 
 	{
@@ -114,7 +113,8 @@ public class PetRockMain
 			default: break;
 		}	
 	}
-				
+  
+    // Used on line ___ to create a random event.				
     public static void randomEventGenerator(PetRock petRock)
     {
         int propertyOfEvent = (int)(Math.random() * 5);
@@ -189,13 +189,13 @@ public class PetRockMain
         }
     }
 
+    // Used on line ____to end the game... nonconsensually.
     public static boolean gameEndCheck(PetRock rockPet, int counter) 
     {
         return ( (rockPet.getHunger() == 10) || (rockPet.getBoredom() == 10) || ( (rockPet.getEnergy() == 0) && (counter >= 3) ) );
     }
 
-    // Gets input from user. 
-    // Converts it to INT. 
+    // Used on line ____ to gather an input from the user. 
     // Ensures valid input (1 <= x <= 5).
     public static int getUserInput(Scanner input) 
     {
@@ -240,6 +240,7 @@ public class PetRockMain
         return userInputAsInt;
     }
     
+    // Used on line ____ to feed the rock.
     public static void feed(PetRock petRock) 
     {
         if (petRock.getEnergy() < 1)
@@ -256,6 +257,7 @@ public class PetRockMain
         polishDiminishReturnCurrent = 0;
     }
 
+    // Used on line ____ to play with the rock.
     public static void play(PetRock petRock) 
     {
         if (petRock.getEnergy() < 2)
@@ -272,6 +274,7 @@ public class PetRockMain
         polishDiminishReturnCurrent = 0;
     }
 
+    // Used on line ____ to polish the rock.
     public static void polish(PetRock petRock) 
     {
         petRock.polishRock(polishDiminishReturnCurrent);
@@ -292,7 +295,7 @@ public class PetRockMain
             petRock.setName(newRockName);
         }
     }
-	
+	  // Used on line ____ to end the game.... consensually.
     public static void gameEnd(int numTurns) 
     {
         Output.gameEnd(numTurns);

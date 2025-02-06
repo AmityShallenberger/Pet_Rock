@@ -114,6 +114,10 @@ public class Output
         }
     }
     
+    // Used in method "randomEventGenerator(PetRock)" in PetRockMain.java
+    // Used to generate output messages for each type of random event.
+    // For propertyOfEvent, "0" = positive event and "1" = negative event.
+    // typeOfEvent determines which positive/negative event is outputted.
     public static void RanEventMessage(int propertyOfEvent, int typeOfEvent)
     {
         // Positive
