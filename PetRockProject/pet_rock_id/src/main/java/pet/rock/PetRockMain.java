@@ -77,24 +77,24 @@ public class PetRockMain
     {
             switch (input) 
             {
-                    case 1: // Feed
-                            feed(petRock);
-                            break;
-                    case 2: // Play
-                            play(petRock);
-                            break;
-                    case 3: // Polish
-                            polish(petRock);
-                            break;
-                    case 4: // CheckStats
-                            System.out.println(petRock);
-                            petRock.setEnergy(petRock.getEnergy() + 1);
-                            break;
-                    case 5: // Quit
-                            shouldLoop = false;
-                            Output.gameExit();
-                            break;
-                    default: break;
+				case 1: // Feed
+					feed(petRock);
+					break;
+				case 2: // Play
+					play(petRock);
+					break;
+				case 3: // Polish
+					polish(petRock);
+					break;
+				case 4: // CheckStats
+					System.out.println(petRock);
+					petRock.setEnergy(petRock.getEnergy() + 1);
+					break;
+				case 5: // Quit
+					shouldLoop = false;
+					Output.gameExit();
+					break;
+				default: break;
             }	
     }
 
