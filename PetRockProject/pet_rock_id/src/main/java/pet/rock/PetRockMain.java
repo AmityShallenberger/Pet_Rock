@@ -42,27 +42,7 @@ public class PetRockMain
                     randomEventGenerator(petRock);
                 }
 
-                switch (userInput) 
-                {
-                    case 1: // Feed
-                        feed(petRock);
-                        break;
-                    case 2: // Play
-                        play(petRock);
-                        break;
-                    case 3: // Polish
-                        polish(petRock);
-                        break;
-                    case 4: // CheckStats
-                        System.out.println(petRock);
-                        petRock.setEnergy(petRock.getEnergy() + 1);
-                        break;
-                    case 5: // Quit
-                        shouldLoop = false;
-                        Output.gameExit();
-                        break;
-                    default: break;
-                }
+				doAction(petRock, userInput);
 
                 firstRound = false;
                 petRock.updateStats();
@@ -70,21 +50,49 @@ public class PetRockMain
 
                 turnNumber += 1;
                 
-                if (petRock.getEnergy() == 0)
-                {
-                    gameOverCounter++;
-                }
-                else 
-                {
-                    gameOverCounter = 0;
-                }
+                gameOverCounter = incrementGameOverCounter(petRock, gameOverCounter);
 
                 petRock.makeSavedData(f, petRock);				
             }
 		
         }
-	input.close();	
+		input.close();	
     }
+	
+	public static int incrementGameOverCounter(PetRock petRock, int currentCounter) 
+	{
+		int returnCounter = 0;
+		if (petRock.getEnergy() == 0)
+		{
+			returnCounter = currentCounter + 1;
+		}
+		return returnCounter;
+	}
+				
+	public static void doAction(PetRock petRock, int input) 
+	{
+		switch (input) 
+		{
+			case 1: // Feed
+				feed(petRock);
+				break;
+			case 2: // Play
+				play(petRock);
+				break;
+			case 3: // Polish
+				polish(petRock);
+				break;
+			case 4: // CheckStats
+				System.out.println(petRock);
+				petRock.setEnergy(petRock.getEnergy() + 1);
+				break;
+			case 5: // Quit
+				shouldLoop = false;
+				Output.gameExit();
+				break;
+			default: break;
+		}	
+	}
     
     public static void randomEventGenerator(PetRock petRock)
     {
