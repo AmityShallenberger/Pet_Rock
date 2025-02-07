@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 public class PetRockMain 
 {
-
     private static boolean shouldLoop = true;
     private static boolean gameOver = false;
     public static boolean feedOnCooldown = false;
@@ -14,6 +13,7 @@ public class PetRockMain
     public static int polishDiminishReturnCurrent = 0;
     public static File f = new File("SavedData.json");
 
+	// MAIN.
     public static void main (String [] args) 
     {
         Scanner input = new Scanner(System.in);
