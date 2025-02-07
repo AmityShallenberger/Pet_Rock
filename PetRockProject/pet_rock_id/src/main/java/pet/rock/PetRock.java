@@ -3,7 +3,9 @@ package pet.rock;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.Scanner;
-import com.google.gson.*;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class PetRock
 {
