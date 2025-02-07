@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 public class PetRockMain 
 {
-
     private static boolean shouldLoop = true;
     private static boolean gameOver = false;
     public static boolean feedOnCooldown = false;
@@ -14,6 +13,7 @@ public class PetRockMain
     public static int polishDiminishReturnCurrent = 0;
     public static File f = new File("SavedData.json");
 
+    // MAIN.
     public static void main (String [] args) 
     {
         Scanner input = new Scanner(System.in);
@@ -42,7 +42,7 @@ public class PetRockMain
                     randomEventGenerator(petRock);
                 }
 
-				doAction(petRock, userInput);
+                doAction(petRock, userInput);
 
                 firstRound = false;
                 petRock.updateStats();
@@ -59,41 +59,47 @@ public class PetRockMain
 		input.close();	
     }
 	
-	public static int incrementGameOverCounter(PetRock petRock, int currentCounter) 
-	{
-		int returnCounter = 0;
-		if (petRock.getEnergy() == 0)
-		{
-			returnCounter = currentCounter + 1;
-		}
-		return returnCounter;
-	}
-				
-	public static void doAction(PetRock petRock, int input) 
-	{
-		switch (input) 
-		{
-			case 1: // Feed
-				feed(petRock);
-				break;
-			case 2: // Play
-				play(petRock);
-				break;
-			case 3: // Polish
-				polish(petRock);
-				break;
-			case 4: // CheckStats
-				System.out.println(petRock);
-				petRock.setEnergy(petRock.getEnergy() + 1);
-				break;
-			case 5: // Quit
-				shouldLoop = false;
-				Output.gameExit();
-				break;
-			default: break;
-		}	
-	}
-    
+    // Used on line 54.
+    // Adds one to the gameOverCount variable.
+    public static int incrementGameOverCounter(PetRock petRock, int currentCounter) 
+    {
+            int returnCounter = 0;
+            if (petRock.getEnergy() == 0)
+            {
+                    returnCounter = currentCounter + 1;
+            }
+            return returnCounter;
+    }
+
+    // Used on line 46.
+    // Takes in userInput and performs an action.
+    public static void doAction(PetRock petRock, int input) 
+    {
+            switch (input) 
+            {
+                    case 1: // Feed
+                            feed(petRock);
+                            break;
+                    case 2: // Play
+                            play(petRock);
+                            break;
+                    case 3: // Polish
+                            polish(petRock);
+                            break;
+                    case 4: // CheckStats
+                            System.out.println(petRock);
+                            petRock.setEnergy(petRock.getEnergy() + 1);
+                            break;
+                    case 5: // Quit
+                            shouldLoop = false;
+                            Output.gameExit();
+                            break;
+                    default: break;
+            }	
+    }
+
+    // Used on line 43.
+    // Generates a random event to affect the rock.
     public static void randomEventGenerator(PetRock petRock)
     {
         int propertyOfEvent = (int)(Math.random() * 5);
@@ -169,14 +175,15 @@ public class PetRockMain
         }
     }
 
+    // Used on line 30.
+    // Determines whether the game should end based the Rock's stats.
     public static boolean gameEndCheck(PetRock rockPet, int counter) 
     {
         return ( (rockPet.getHunger() == 10) || (rockPet.getBoredom() == 10) || ( (rockPet.getEnergy() == 0) && (counter >= 3) ) );
     }
 
-    // Gets input from user. 
-    // Converts it to INT. 
-    // Ensures valid input (1 <= x <= 5).
+    // Used on line 37.
+    // Gets input from user and validates it.
     public static int getUserInput(Scanner input) 
     {
         String userInput = ""; 
@@ -220,12 +227,14 @@ public class PetRockMain
         return userInputAsInt;
     }
     
+    // Used on line 82.
+    // Feeds the rock and adjusts cooldowns.
     public static void feed(PetRock petRock) 
     {
         if (petRock.getEnergy() < 1)
-		{
+        {
             Output.noEnergy(0);
-		}
+        }
         else 
         {
             petRock.feedRock();
@@ -236,6 +245,8 @@ public class PetRockMain
         polishDiminishReturnCurrent = 0;
     }
 
+    // Used on line 85.
+    // Plays with the rock and adjusts cooldowns.
     public static void play(PetRock petRock) 
     {
         if (petRock.getEnergy() < 2)
@@ -252,6 +263,8 @@ public class PetRockMain
         polishDiminishReturnCurrent = 0;
     }
 
+    // Used on line 88.
+    // Polishes the rock and adjusts cooldowns.
     public static void polish(PetRock petRock) 
     {
         petRock.polishRock(polishDiminishReturnCurrent);
@@ -260,7 +273,11 @@ public class PetRockMain
         playOnCooldown = false;
     }
 
-    public static void rockCreation(PetRock petRock, Scanner input) {
+    // Used on line 26.
+    // Gets data from previous save data.
+    // If one doesn't exist, creates a new save.
+    public static void rockCreation(PetRock petRock, Scanner input) 
+    {
         if (f.exists())
 		{
             petRock.getSavedData(f);
@@ -273,6 +290,8 @@ public class PetRockMain
         }
     }
 	
+    // Used on line 33.
+    // Ends the game and deletes the save file.
     public static void gameEnd(int numTurns) 
     {
         Output.gameEnd(numTurns);
