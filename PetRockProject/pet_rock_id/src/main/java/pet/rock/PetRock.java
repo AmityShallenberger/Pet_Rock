@@ -105,16 +105,16 @@ public class PetRock
     // Gameplay Methods.
         public void feedRock()
         {
-                hunger -= 2;
-                boredom += 1;
-                energy -= 1;
+			setHunger(getHunger() - 2);
+			setBoredom(getBoredom() + 1);
+			setEnergy(getEnergy() - 1);
         }
 
         public void playRock()
         {
-                boredom -= 3;
-                hunger += 1;
-                energy -= 2;
+			setHunger(getHunger() + 1);
+			setBoredom(getBoredom() - 3);
+			setEnergy(getEnergy() - 2);
         }
 		
 		
@@ -125,18 +125,18 @@ public class PetRock
 		switch (diminishingReturn) 
 		{
 			case 0:
-				hunger -= 1;
-				boredom -= 1;
-				energy += 1;
+				setHunger(getHunger() - 1);
+				setBoredom(getBoredom() - 1);
+				setEnergy(getEnergy() + 1);
 				mood = "Happy"; 
 				break;
 			case 1:
-				hunger -= 1;
-				energy += 1;
+				setHunger(getHunger() - 1);
+				setEnergy(getEnergy() + 1);
 				updateMood();
 				break;
 			case 2:
-				hunger -= 1;
+				setHunger(getHunger() - 1);
 				updateMood();
 				break;
 			case 3: 
@@ -144,37 +144,6 @@ public class PetRock
 				break;
 			default: break;
 		}	
-	}
-
-
-	public void updateStats()
-	{
-		if (hunger < 0) 
-		{
-				hunger = 0;
-		}
-		if (hunger > 10) 
-		{
-				hunger = 10;
-		}
-
-		if (boredom < 0) 
-		{
-				boredom = 0;
-		}
-		if (boredom > 10) 
-		{
-				boredom = 10;
-		}
-		
-		if (energy < 0) 
-		{
-				energy = 0;
-		}
-		if (energy > 10) 
-		{
-				energy = 10;
-		}
 	}
 
 	public void updateMood()
