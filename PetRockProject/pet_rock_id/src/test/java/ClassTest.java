@@ -44,12 +44,4 @@ public class ClassTest {
         
         assertEquals("Bored", a.getMood());
     }
-    
-    /*
-        Methods to Test.
-         - Amity: feedRock() and playRock().
-         - Will: makeSavedData() and getSavedData().
-         - Yarrick: polishRock() and updateMood().
-         - Bohan: updateStats().
-    */
 }
