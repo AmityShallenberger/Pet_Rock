@@ -28,7 +28,7 @@ public class PetRockMain
         {
             gameOver = (gameEndCheck(petRock, gameOverCounter));
             
-            if ((gameOver) == true)
+            if (gameOver)
                 gameEnd(turnNumber);
             else 
             {
@@ -58,44 +58,44 @@ public class PetRockMain
         }
 		input.close();	
     }
-	
+    
     // Used on line 54.
     // Adds one to the gameOverCount variable.
     public static int incrementGameOverCounter(PetRock petRock, int currentCounter) 
     {
-            int returnCounter = 0;
-            if (petRock.getEnergy() == 0)
-            {
-                    returnCounter = currentCounter + 1;
-            }
-            return returnCounter;
+        int returnCounter = 0;
+        
+        if (petRock.getEnergy() == 0)
+                returnCounter = currentCounter + 1;
+        
+        return returnCounter;
     }
 
     // Used on line 46.
     // Takes in userInput and performs an action.
     public static void doAction(PetRock petRock, int input) 
     {
-            switch (input) 
-            {
-                    case 1: // Feed
-                            feed(petRock);
-                            break;
-                    case 2: // Play
-                            play(petRock);
-                            break;
-                    case 3: // Polish
-                            polish(petRock);
-                            break;
-                    case 4: // CheckStats
-                            System.out.println(petRock);
-                            petRock.setEnergy(petRock.getEnergy() + 1);
-                            break;
-                    case 5: // Quit
-                            shouldLoop = false;
-                            Output.gameExit();
-                            break;
-                    default: break;
-            }	
+        switch (input) 
+        {
+            case 1: // Feed
+                feed(petRock);
+                break;
+            case 2: // Play
+                play(petRock);
+                break;
+            case 3: // Polish
+                polish(petRock);
+                break;
+            case 4: // CheckStats
+                System.out.println(petRock);
+                petRock.setEnergy(petRock.getEnergy() + 1);
+                break;
+            case 5: // Quit
+                shouldLoop = false;
+                Output.gameExit();
+                break;
+            default: break;
+        }	
     }
 
     // Used on line 43.
@@ -110,67 +110,68 @@ public class PetRockMain
             // Positive
             if (propertyOfEvent == 0) 
             {
-				switch (typeOfEvent) 
-				{
-					case 0: 
-						//System.out.println("\nYour rock found a shiny pebble! It’s happier now!");
-						petRock.setHunger(petRock.getHunger() - 1);
-						petRock.setBoredom(petRock.getBoredom() - 2);
-						break;
-					case 1: 
-						//System.out.println("\nYour rock got some extra sleep! Energy restored!");
-						petRock.setEnergy(10);
-						break;
-					case 2: 
-						//System.out.println("\nYour rock found a snack! Satiated some Hunger!");
-						petRock.setHunger(petRock.getHunger() - 3);
-						break;
-					case 3: 
-						//System.out.println("Your rock got flirted with your rock is feeling energized");
-						petRock.setEnergy(10);
-						break;
-					case 4: 
-						//System.out.println("Your rock went for a relaxing walk emergy increased!");
-						petRock.setEnergy(petRock.getEnergy() + 1);
-						break;
-					case 5: 
-						//System.out.println("Your rock had a really nice day");
-						petRock.setBoredom(petRock.getBoredom() - 1);
-						petRock.setEnergy(petRock.getEnergy() + 1);
-						break;
-					default: break;
-				}
+                switch (typeOfEvent) 
+                {
+                    case 0: 
+                        // Your rock found a shiny pebble! It’s happier now!
+                        petRock.setHunger(petRock.getHunger() - 1);
+                        petRock.setBoredom(petRock.getBoredom() - 2);
+                        break;
+                    case 1: 
+                        // Your rock got some extra sleep! Energy restored!
+                        petRock.setEnergy(10);
+                        break;
+                    case 2: 
+                        // Your rock found a snack! Satiated some Hunger!
+                        petRock.setHunger(petRock.getHunger() - 3);
+                        break;
+                    case 3: 
+                        // Your rock got flirted with your rock is feeling energized
+                        petRock.setEnergy(10);
+                        break;
+                    case 4: 
+                        // Your rock went for a relaxing walk emergy increased!
+                        petRock.setEnergy(petRock.getEnergy() + 1);
+                        break;
+                    case 5: 
+                        // Your rock had a really nice day
+                        petRock.setBoredom(petRock.getBoredom() - 1);
+                        petRock.setEnergy(petRock.getEnergy() + 1);
+                        break;
+                    default: break;
+                }
             }
             
             // Negative
             else 
             {
-				switch (typeOfEvent) 
-				{
-					case 0: 
-						//System.out.println("\nYour rock is scared by a sudden noise! Boredom increased!");
-						petRock.setBoredom(petRock.getBoredom() + 2);
-						break;
-					case 1: 
-						//System.out.println("\nYour rock is grumpy today. Hunger increased!");
-						petRock.setHunger(petRock.getHunger() + 2);
-						break;
-					case 2: 
-						//System.out.println("\nYour rock smelled something delicious. Hunger increased!");
-						petRock.setHunger(petRock.getHunger() + 2);
-						break;
-					case 3: 
-						//System.out.println("\nYour rock is feeling out of it today. Energy decreased!");
-						petRock.setEnergy(petRock.getEnergy() - 2);
-						break;
-					case 4: 
-						//System.out.println("Your rock lost a friend.  Hunger increased and energy decreased");
-						petRock.setEnergy(petRock.getEnergy() - 1);
-						petRock.setHunger(petRock.getHunger() + 1);
-						break;
-					default: break;
-				}
+                switch (typeOfEvent) 
+                {
+                    case 0: 
+                        // Your rock is scared by a sudden noise! Boredom increased!
+                        petRock.setBoredom(petRock.getBoredom() + 2);
+                        break;
+                    case 1: 
+                        // Your rock is grumpy today. Hunger increased!
+                        petRock.setHunger(petRock.getHunger() + 2);
+                        break;
+                    case 2: 
+                        // Your rock smelled something delicious. Hunger increased!
+                        petRock.setHunger(petRock.getHunger() + 2);
+                        break;
+                    case 3: 
+                        // Your rock is feeling out of it today. Energy decreased!
+                        petRock.setEnergy(petRock.getEnergy() - 2);
+                        break;
+                    case 4: 
+                        // Your rock lost a friend.  Hunger increased and energy decreased
+                        petRock.setEnergy(petRock.getEnergy() - 1);
+                        petRock.setHunger(petRock.getHunger() + 1);
+                        break;
+                    default: break;
+                }
             }
+            
             Output.RanEventMessage(propertyOfEvent,typeOfEvent);
         }
     }
@@ -179,7 +180,8 @@ public class PetRockMain
     // Determines whether the game should end based the Rock's stats.
     public static boolean gameEndCheck(PetRock rockPet, int counter) 
     {
-        return ( (rockPet.getHunger() == 10) || (rockPet.getBoredom() == 10) || ( (rockPet.getEnergy() == 0) && (counter >= 3) ) );
+        return ((rockPet.getHunger() == 10) || (rockPet.getBoredom() == 10) || 
+                ((rockPet.getEnergy() == 0) && (counter >= 3)));
     }
 
     // Used on line 37.
@@ -207,21 +209,17 @@ public class PetRockMain
             // User has entered a non-integer value OR
             // an integer value that is not between 1 and 5.
             if(!validIntegerInput || userInputAsInt > 5 || userInputAsInt < 1)
-			{
                 Output.invalidInput();
-			}
+            
             else if(feedOnCooldown && userInputAsInt == 1)
-			{
                 Output.cooldown(0);
-			}
+	
             else if(playOnCooldown && userInputAsInt == 2)
-			{
                 Output.cooldown(1);
-			}
+			
             else
-			{
                 validUserInput = true;
-			}
+			
         }
 
         return userInputAsInt;
@@ -232,9 +230,8 @@ public class PetRockMain
     public static void feed(PetRock petRock) 
     {
         if (petRock.getEnergy() < 1)
-        {
             Output.noEnergy(0);
-        }
+        
         else 
         {
             petRock.feedRock();
@@ -250,9 +247,8 @@ public class PetRockMain
     public static void play(PetRock petRock) 
     {
         if (petRock.getEnergy() < 2)
-		{
             Output.noEnergy(1);
-		}
+        
         else 
         {
             petRock.playRock();
@@ -279,9 +275,8 @@ public class PetRockMain
     public static void rockCreation(PetRock petRock, Scanner input) 
     {
         if (f.exists())
-		{
             petRock.getSavedData(f);
-		}
+		
         else 
         {
             Output.noSaveData();
@@ -297,5 +292,4 @@ public class PetRockMain
         Output.gameEnd(numTurns);
         f.delete();	
     }
-
 }
