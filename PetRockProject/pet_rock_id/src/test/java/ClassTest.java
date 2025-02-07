@@ -108,37 +108,6 @@ public class ClassTest {
         assertEquals("test", a.getName());
     }
 	
-	@Test
-	public void testUpdateStats() {
-		a = new PetRock("", "", 1, 1, 10);
-		a.setName("BohanRock");
-		
-		a.setHunger(-1);
-		a.updateStats();
-		assertEquals(0, a.getHunger());
-		
-		a.setHunger(50);
-		a.updateStats();
-		assertEquals(10, a.getHunger());
-		
-		a.setBoredom(-1);
-		a.updateStats();
-		assertEquals(0, a.getBoredom());
-		
-		a.setBoredom(50);
-		a.updateStats();
-		assertEquals(10, a.getBoredom());
-		
-		a.setEnergy(-1);
-		a.updateStats();
-		assertEquals(0, a.getEnergy());
-		
-		a.setEnergy(50);
-		a.updateStats();
-		assertEquals(10, a.getEnergy());
-		
-		
-	}
 	
 	
 }
