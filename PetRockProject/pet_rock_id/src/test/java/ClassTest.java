@@ -12,9 +12,67 @@ public class ClassTest {
 
         assertEquals("Amity", a.getName());
     }
+    
     @Test
     public void testSetHunger(){
         a = new PetRock("", "", 1, 1, 10);
+        a.setHunger(99);
+        assertEquals(10,a.getHunger());
+        a.setHunger(-99);
+        assertEquals(0,a.getHunger());
+
+    }
+  
+    @Test
+    public void testFeedRock(){
+        a = new PetRock("", "", 5, 5, 5);
+        a.feedRock();
         
+        //   hunger -= 2;
+        //   boredom += 1;
+        //   energy -= 1;
+        assertEquals(3, a.getHunger());
+        assertEquals(6, a.getBoredom());
+        assertEquals(4, a.getEnergy());
+    }
+  
+    @Test
+    public void testPlayRock(){
+        a = new PetRock("", "", 5, 5, 5);
+        a.playRock();
+
+        //boredom -= 3;
+        //hunger += 1;
+        //energy -= 2;
+        assertEquals(6, a.getHunger());
+        assertEquals(2, a.getBoredom());
+        assertEquals(3, a.getEnergy());
+
+    }
+
+    @Test
+    public void testPolishRock() {
+        a = new PetRock("", "", 5, 5, 5);
+        int diminishingReturning = 0;
+         
+        a.polishRock(diminishingReturning);
+        
+        assertEquals(4, a.getHunger());
+        assertEquals(4, a.getBoredom());
+        assertEquals(6, a.getEnergy());
+        assertEquals("Happy", a.getMood());
+    }
+    
+    @Test
+    public void testUpdateMood() {
+        a = new PetRock("", "", 1, 1, 10);
+        
+        a.setBoredom(6);
+        a.setEnergy(4);
+        a.setHunger(5);
+        
+        a.updateMood();
+        
+        assertEquals("Bored", a.getMood());
     }
 }

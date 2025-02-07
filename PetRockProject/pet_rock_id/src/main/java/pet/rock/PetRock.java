@@ -3,7 +3,9 @@ package pet.rock;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.Scanner;
-import com.google.gson.*;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class PetRock
 {
@@ -62,17 +64,43 @@ public class PetRock
 
         public void setHunger(int newHunger)
         {
-                hunger = newHunger;
+                
+            hunger = newHunger;
+            if (hunger < 0) 
+		    {
+			    	hunger = 0;
+		    }
+		    if (hunger > 10) 
+		    {
+			    	hunger = 10;
+		    }
         }
 
         public void setBoredom(int newBoredom)
         {
-                boredom = newBoredom;
+            boredom = newBoredom;
+            if (boredom < 0) 
+		    {
+			    boredom = 0;
+		    }
+		    if (boredom > 10) 
+		    {
+		    	boredom = 10;
+		    }
         }
 
         public void setEnergy(int newEnergy)
         {
-                energy = newEnergy;
+            energy = newEnergy;
+            if (energy < 0) 
+		    {
+			    energy = 0;
+		    }
+		    if (energy > 10) 
+		    {
+			    energy = 10;
+		    }
+        
         }
 
 
