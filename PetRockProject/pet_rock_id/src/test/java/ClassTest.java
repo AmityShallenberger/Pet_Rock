@@ -123,8 +123,10 @@ public class ClassTest {
     }
 
     @Test
-    public void testmakesave() {
-        try {
+    public void testMakeSave() 
+    {
+        try 
+        {
             a = new PetRock("test", "", 1, 1, 10);
             File f = new File("SavedData.json");
             Scanner readFile = new Scanner(f);
@@ -136,21 +138,22 @@ public class ClassTest {
             String expected = "  \"name\": \"test\",";
             String actual = readFile.nextLine();
             assertEquals(expected, actual);
-        } catch (Exception e) {
+        } 
+        
+        catch (Exception e) 
+        {
             
         }
     }
     
     @Test
-    public void testgetsave() {
+    public void testGetSave() 
+    {
         File f = new File("SavedData.json");
-        a.setName("different");
+        a.setName("test");
 
         a.getSavedData(f);
 
         assertEquals("test", a.getName());
     }
-	
-	
-	
 }

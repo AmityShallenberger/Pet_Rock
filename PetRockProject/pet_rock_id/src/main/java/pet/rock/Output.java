@@ -10,6 +10,13 @@ public class Output
     // TEMPORARY variable to turn output on/off for testing.
     static boolean lightSwitch = true;
     
+    // Turn off output for the program.
+    // Used for testing purposes.
+    public static void turnOffOutput()
+    {
+        lightSwitch = false;
+    }
+    
     // Used in the method "checkSaveData()" in PetRock.java
     // JSON file does not exist.
     public static void noSaveData()
@@ -173,5 +180,13 @@ public class Output
                 }
             }
         }
+    }
+    
+    // Used in method "doAction(int" in PetRockMain.java
+    // Used to print out the stats (name, hunger, etc.) of a rock.
+    public static void rockStats(PetRock balboa)
+    {
+        if(lightSwitch)
+            System.out.println(balboa);
     }
 }

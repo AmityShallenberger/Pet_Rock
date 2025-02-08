@@ -87,7 +87,7 @@ public class PetRockMain
                 polish(petRock);
                 break;
             case 4: // CheckStats
-                System.out.println(petRock);
+                Output.rockStats(petRock);
                 petRock.setEnergy(petRock.getEnergy() + 1);
                 break;
             case 5: // Quit
