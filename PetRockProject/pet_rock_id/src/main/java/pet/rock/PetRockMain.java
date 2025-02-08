@@ -55,7 +55,6 @@ public class PetRockMain
                 petRock.makeSavedData(f, petRock);				
             }
 		
-<<<<<<< HEAD
         }
 		input.close();	
     }
@@ -65,196 +64,6 @@ public class PetRockMain
     public static int incrementGameOverCounter(PetRock petRock, int currentCounter) 
     {
         int returnCounter = 0;
-=======
-		while ((shouldLoop == true) && (gameOver == false)) 
-		{
-			
-			if ( (petRock.getHunger() == 10) || (petRock.getBoredom() == 10) || (petRock.getEnergy() == 0) ) 
-			{
-				System.out.println("Your rock has rolled away in protest! Game over. You lasted " + turnNumber + " turns!");
-				gameOver = true;
-				f.delete(); // delete saved data if game over
-				break;
-			}
-		
-
-			display(feedOnCooldown, playOnCooldown);
-			int userInput = getUserInput(feedOnCooldown, playOnCooldown);
-
-			// String userInput = input.nextLine();
-
-			// Gameplay Logic.
-			// 1.
-			if (userInput == 1) 
-			{
-				if (petRock.getEnergy() < 1) 
-				{
-					System.out.println("Pet rock does not have enough energy to be fed");
-				} 
-				
-				else 
-				{
-					petRock.feedRock();
-					feedOnCooldown = true;
-				}
-				
-				playOnCooldown = false;
-				polishDiminishReturnCurrent = 0;
-			}
-
-			// 2.
-			else if (userInput == 2)
-			{
-					if (petRock.getEnergy() < 2) 
-					{
-						System.out.println("Pet rock does not have enough energy to play");
-					} 
-					
-					else 
-					{
-						petRock.playRock();
-						playOnCooldown = true;
-					}
-					
-					feedOnCooldown = false;
-					polishDiminishReturnCurrent = 0;
-			}
-
-			// 3.
-			else if (userInput == 3)
-			{
-				petRock.polishRock(polishDiminishReturnCurrent);
-				polishDiminishReturnCurrent += 1;
-				feedOnCooldown = false;
-				playOnCooldown = false;
-			}
-
-			// 4.
-			else if (userInput == 4)
-			{
-				System.out.println(petRock);
-				petRock.setEnergy(petRock.getEnergy() + 1);
-			}
-
-			// 5.
-			// Change this to separate quitting from game over! 
-			// Make sure to save rock state!
-			else
-			{
-				shouldLoop = false;
-				System.out.println("\nExiting Application...");
-			}
-
-			petRock.setHunger(petRock.getHunger() + 1);
-			petRock.setBoredom(petRock.getBoredom() + 1);
-
-			// Random events.
-			int propertyOfEvent = (int)(Math.random() * 5);
-			int typeOfEvent = (int)(Math.random() * 10);
-
-			// Should have a random event this turn?
-			if ((propertyOfEvent < 3) && (shouldLoop == true) && (gameOver == false))
-			{
-				// Positive
-				if (propertyOfEvent == 0) 
-				{
-					switch (typeOfEvent) 
-					{
-						case 0: 
-							System.out.println("\nYour rock found a shiny pebble! It’s happier now!");
-							petRock.setHunger(petRock.getHunger() - 1);
-							petRock.setBoredom(petRock.getBoredom() - 2);
-							break;
-						case 1: 
-							System.out.println("\nYour rock got some extra sleep! Energy restored!");
-							petRock.setEnergy(10);
-							break;
-						case 2: 
-							System.out.println("\nYour rock found a snack! Satiated some Hunger!");
-							petRock.setHunger(petRock.getHunger() - 3);
-							break;
-						case 3: 
-							System.out.println("Your rock got flirted with your rock is now happy!");
-							petRock.setMood("Happy");
-							break;
-						case 4: 
-							System.out.println("Your rock went for a relaxing walk emergy increased!");
-							if(petRock.getEnergy() == 10){
-								break;	
-							}
-							petRock.setEnergy(petRock.getEnergy() + 1);
-							break;
-						case 5: 
-							System.out.println("Your rock had a really nice day");
-							petRock.setBoredom(petRock.getBoredom() - 1);
-							petRock.setEnergy(petRock.getEnergy() + 1);
-							break;
-						default: break;
-					}
-				}
-				// Negative
-				else 
-				{
-					switch (typeOfEvent) 
-					{
-						case 0: 
-							System.out.println("\nYour rock is scared by a sudden noise! Boredom increased!");
-							petRock.setBoredom(petRock.getBoredom() + 2);
-							break;
-						case 1: 
-							System.out.println("\nYour rock is grumpy today. Hunger increased!");
-							petRock.setHunger(petRock.getHunger() + 2);
-							break;
-						case 2: 
-							System.out.println("\nYour rock smelled something delicious. Hunger increased!");
-							petRock.setHunger(petRock.getHunger() + 2);
-							break;
-						case 3: 
-							System.out.println("\nYour rock is feeling out of it today. Energy decreased!");
-							petRock.setEnergy(petRock.getEnergy() - 2);
-							break;
-						case 4: 
-							System.out.println("Your rock lost a friend.  Hunger increased and energy decreased");
-							petRock.setEnergy(petRock.getEnergy() - 1);
-							petRock.setHunger(petRock.getHunger() + 1);
-							break;
-				
-						default: break;
-					}
-				}
-			}
-
-			petRock.updateStats();
-
-			turnNumber += 1;
-
-			//After every action turn the current stats into json then write to the current json file
-
-			
-			try {
-
-
-				if (!f.exists()) {
-					f = new File("SavedData.json");
-				} 
-
-				String jsonData = gsonB.setPrettyPrinting().create().toJson(petRock);
-
-				FileWriter fw = new FileWriter(f.getPath());
-
-				fw.write(jsonData);	
-				fw.close();
-
-			} 
-			
-			catch (Exception e) 
-			{
-					System.err.println(e);
-			}
-		}
-	}
-
->>>>>>> main
         
         if (petRock.getEnergy() == 0)
                 returnCounter = currentCounter + 1;
@@ -468,7 +277,6 @@ public class PetRockMain
         if (f.exists())
             petRock.getSavedData(f);
 		
-<<<<<<< HEAD
         else 
         {
             Output.noSaveData();
@@ -485,9 +293,3 @@ public class PetRockMain
         f.delete();	
     }
 }
-=======
-		return userInputAsInt;
-	}
-    
-}
->>>>>>> main
