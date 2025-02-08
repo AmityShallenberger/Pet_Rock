@@ -18,6 +18,7 @@ public class MainTest {
     public void testDoAction()
     {
         a = new PetRock("", "", 5, 5, 10);
+        Output.turnOffOutput();
         
         PetRockMain.doAction(a, 1); // Hunger = 3, Boredom = 6, Energy = 9.
         assertEquals(3, a.getHunger());
@@ -64,6 +65,8 @@ public class MainTest {
     public void testFeed()
     {
         a = new PetRock("", "", 5, 5, 0);
+        Output.turnOffOutput();
+        
         PetRockMain.feed(a); // shouldn't do anything bc no energy.
         assertEquals(5, a.getHunger());
         assertEquals(5, a.getBoredom());
@@ -80,6 +83,8 @@ public class MainTest {
     public void testPlay()
     {
         a = new PetRock("", "", 5, 5, 1);
+        Output.turnOffOutput();
+        
         PetRockMain.play(a); // shouldn't do anything bc not enough energy.
         assertEquals(5, a.getHunger());
         assertEquals(5, a.getBoredom());
