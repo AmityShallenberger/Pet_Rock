@@ -2,6 +2,9 @@ import pet.rock.*;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
+import java.io.File;
+import java.util.Scanner;
+
 public class ClassTest {
     PetRock a = new PetRock("", "", 1, 1, 10);
 
@@ -118,4 +121,36 @@ public class ClassTest {
         a.updateMood();
         assertEquals("Sad", a.getMood());
     }
+
+    @Test
+    public void testmakesave() {
+        try {
+            a = new PetRock("test", "", 1, 1, 10);
+            File f = new File("SavedData.json");
+            Scanner readFile = new Scanner(f);
+    
+            a.makeSavedData(f, a);
+
+            readFile.nextLine();
+
+            String expected = "  \"name\": \"test\",";
+            String actual = readFile.nextLine();
+            assertEquals(expected, actual);
+        } catch (Exception e) {
+            
+        }
+    }
+    
+    @Test
+    public void testgetsave() {
+        File f = new File("SavedData.json");
+        a.setName("different");
+
+        a.getSavedData(f);
+
+        assertEquals("test", a.getName());
+    }
+	
+	
+	
 }

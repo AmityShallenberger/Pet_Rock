@@ -45,7 +45,7 @@ public class PetRockMain
                 doAction(petRock, userInput);
 
                 firstRound = false;
-                petRock.updateStats();
+                // petRock.updateStats();
                 petRock.updateMood();
 
                 turnNumber += 1;
