@@ -54,74 +54,65 @@ public class PetRock
     // Set-Methods.
         public void setName(String newName)
         {
-                name = newName;
+            name = newName;
         }
 
         public void setMood(String newMood)
         {
-                mood = newMood;
+            mood = newMood;
         }
 
         public void setHunger(int newHunger)
-        {
-                hunger = newHunger;
-				if (hunger < 0) 
-				{
-						hunger = 0;
-				}
-				if (hunger > 10) 
-				{
-						hunger = 10;
-				}
+        {   
+            hunger = newHunger;
+            
+            if (hunger < 0)
+                hunger = 0;
+            
+            else if (hunger > 10)
+                hunger = 10;
         }
 
         public void setBoredom(int newBoredom)
         {
-                boredom = newBoredom;
-				if (boredom < 0) 
-				{
-					boredom = 0;
-				}
-				if (boredom > 10) 
-				{
-					boredom = 10;
-				}
+            boredom = newBoredom;
+            
+            if (boredom < 0)
+                boredom = 0;
+            
+            else if (boredom > 10)
+                boredom = 10;
         }
 
         public void setEnergy(int newEnergy)
         {
-                energy = newEnergy;
-				if (energy < 0) 
-				{
-					energy = 0;
-				}
-				if (energy > 10) 
-				{
-					energy = 10;
-				}
+            energy = newEnergy;
+            
+            if (energy < 0)
+                energy = 0;
+            
+            else if (energy > 10)
+                energy = 10;
         }
 
 
     // Gameplay Methods.
         public void feedRock()
         {
-			setHunger(getHunger() - 2);
-			setBoredom(getBoredom() + 1);
-			setEnergy(getEnergy() - 1);
+			      setHunger(getHunger() - 2);
+			      setBoredom(getBoredom() + 1);
+			      setEnergy(getEnergy() - 1);
         }
 
         public void playRock()
         {
-			setHunger(getHunger() + 1);
-			setBoredom(getBoredom() - 3);
-			setEnergy(getEnergy() - 2);
+            setHunger(getHunger() + 1);
+            setBoredom(getBoredom() - 3);
+            setEnergy(getEnergy() - 2);
         }
-		
-		
+        
 	public void polishRock(int diminishingReturn)
 	{
-		// EDIT SO SOME OF THESE ONLY FIRE WHEN THE STATS ARE A CERTAIN AMOUNT E.G. WONT BE SAD IF POLISHED ON DIMINISHING RETURN IF CERTAIN STATS ARE HIGH ENOUGH.
-		// done!
 		switch (diminishingReturn) 
 		{
 			case 0:
@@ -148,25 +139,19 @@ public class PetRock
 
 	public void updateMood()
 	{
-		if (energy <= 2)
-		{
-				mood = "Tired";
-		}
-		else if ((hunger < 4) && (boredom < 4) && (energy > 3))
-		{
-				mood = "Happy";
-		}
-		else if ( ( ((hunger < 7) && (hunger > 4)) || ((boredom < 7) && (boredom > 4)) ) && (energy > 3) )
-		{
-				mood = "Bored";
-		}
-		else if ( ((hunger > 7) || (boredom > 7)) || (energy <= 3) )
-		{
-				mood = "Sad";
-		}
-
+            if (energy <= 2)
+                mood = "Tired";
+            
+            else if ((hunger < 4) && (boredom < 4) && (energy > 3))
+                mood = "Happy";
+            
+            else if ( ( ((hunger < 7) && (hunger > 4)) || ((boredom < 7) && (boredom > 4)) ) && (energy > 3) )
+                mood = "Bored";
+            
+            else if ( ((hunger > 7) || (boredom > 7)) || (energy <= 3) )
+                mood = "Sad";
 	}
-
+  
         public void getSavedData(File f) 
         {
             f = new File("SavedData.json");
@@ -199,9 +184,10 @@ public class PetRock
                         System.err.println(e);
                 }
             }
-		}	
+        }	
 
-        public void makeSavedData(File f, PetRock p) {
+        public void makeSavedData(File f, PetRock p) 
+        {
             GsonBuilder gsonB = new GsonBuilder();
 
             try 
