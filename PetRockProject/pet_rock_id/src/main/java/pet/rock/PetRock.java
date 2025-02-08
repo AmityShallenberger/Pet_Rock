@@ -1,8 +1,14 @@
 package pet.rock;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.util.Scanner;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 public class PetRock
 {
-
     private String name;
     private String mood;
     private int hunger;
@@ -20,10 +26,10 @@ public class PetRock
     }
 	
     // Get-Methods.
-    public String getName()
-    {
-        return name;
-    }
+        public String getName()
+        {
+            return name;
+        }
 
         public String getMood()
         {
@@ -48,122 +54,159 @@ public class PetRock
     // Set-Methods.
         public void setName(String newName)
         {
-                name = newName;
+            name = newName;
         }
 
         public void setMood(String newMood)
         {
-                mood = newMood;
+            mood = newMood;
         }
 
         public void setHunger(int newHunger)
-        {
-                hunger = newHunger;
+        {   
+            hunger = newHunger;
+            
+            if (hunger < 0)
+                hunger = 0;
+            
+            else if (hunger > 10)
+                hunger = 10;
         }
 
         public void setBoredom(int newBoredom)
         {
-                boredom = newBoredom;
+            boredom = newBoredom;
+            
+            if (boredom < 0)
+                boredom = 0;
+            
+            else if (boredom > 10)
+                boredom = 10;
         }
 
         public void setEnergy(int newEnergy)
         {
-                energy = newEnergy;
+            energy = newEnergy;
+            
+            if (energy < 0)
+                energy = 0;
+            
+            else if (energy > 10)
+                energy = 10;
         }
 
 
     // Gameplay Methods.
         public void feedRock()
         {
-                hunger -= 2;
-                boredom += 1;
-                energy -= 1;
+			      setHunger(getHunger() - 2);
+			      setBoredom(getBoredom() + 1);
+			      setEnergy(getEnergy() - 1);
         }
 
         public void playRock()
         {
-                boredom -= 3;
-                hunger += 1;
-                energy -= 2;
+            setHunger(getHunger() + 1);
+            setBoredom(getBoredom() - 3);
+            setEnergy(getEnergy() - 2);
         }
-		
-		
-
-	
-       
-            
         
-        // Gameplay Methods.
-         
-
-       
-        public void polishRock(int diminishingReturn) //(int diminishingReturn)
-        {
-                    hunger -= 1; // / (1 + diminishingReturn);
-                    boredom -= 1;
-                    energy += 1;
-                    mood = "Happy";
-                    // Diminshing returns somehow
-        }
-
-        public void updateStats()
-        {
-                    if (hunger < 0) 
-                    {
-                            hunger = 0;
-                    }
-                    if (hunger > 10) 
-                    {
-                            hunger = 10;
-                    }
-
-                    if (boredom < 0) 
-                    {
-                            boredom = 0;
-                    }
-                    if (boredom > 10) 
-                    {
-                            boredom = 10;
-                    }
-        }
-		// EDIT SO SOME OF THESE ONLY FIRE WHEN THE STATS ARE A CERTAIN AMOUNT E.G. WONT BE SAD IF POLISHED ON DIMINISHING RETURN IF CERTAIN STATS ARE HIGH ENOUGH.
-		// done!
-	
-
-
-  
-           
-	////////// PROBABLY SHOULD RETURN SOMETHING. IDK. NEED TO IMPLEMENT LATER
-	public void saveRock() 
+	public void polishRock(int diminishingReturn)
 	{
-		System.out.print("Saving rock...");
+		switch (diminishingReturn) 
+		{
+			case 0:
+				setHunger(getHunger() - 1);
+				setBoredom(getBoredom() - 1);
+				setEnergy(getEnergy() + 1);
+				mood = "Happy"; 
+				break;
+			case 1:
+				setHunger(getHunger() - 1);
+				setEnergy(getEnergy() + 1);
+				updateMood();
+				break;
+			case 2:
+				setHunger(getHunger() - 1);
+				updateMood();
+				break;
+			case 3: 
+				updateMood();
+				break;
+			default: break;
+		}	
 	}
-	
-
-	
-	
 
 	public void updateMood()
 	{
-		if (energy <= 2)
-		{
-				mood = "Tired";
-		}
-		else if ((hunger < 4) && (boredom < 4) && (energy > 3))
-		{
-				mood = "Happy";
-		}
-		else if ( ( ((hunger < 7) && (hunger > 4)) || ((boredom < 7) && (boredom > 4)) ) && (energy > 3) )
-		{
-				mood = "Bored";
-		}
-		else if ( ((hunger > 7) || (boredom > 7)) || (energy <= 3) )
-		{
-				mood = "Sad";
-		}
-
+            if (energy <= 2)
+                mood = "Tired";
+            
+            else if ((hunger < 4) && (boredom < 4) && (energy > 3))
+                mood = "Happy";
+            
+            else if ( ( ((hunger < 7) && (hunger > 4)) || ((boredom < 7) && (boredom > 4)) ) && (energy > 3) )
+                mood = "Bored";
+            
+            else if ( ((hunger > 7) || (boredom > 7)) || (energy <= 3) )
+                mood = "Sad";
 	}
-      
+  
+        public void getSavedData(File f) 
+        {
+            f = new File("SavedData.json");
+
+            if (f.exists()) 
+            {
+                try 
+                {
+                    Scanner readFile = new Scanner(f);
+                    String sData = "";
+                    Gson gson = new Gson();
+
+                    while (readFile.hasNext()) {
+                        sData = sData + readFile.nextLine();
+                    }
+
+                    PetRock p = gson.fromJson(sData, PetRock.class);
+				
+                    readFile.close();
+
+                    this.name = p.getName();
+                    this.mood = p.getMood();
+                    this.hunger = p.getHunger();
+                    this.boredom = p.getBoredom();
+                    this.energy = p.getEnergy();
+                } 
+			
+                catch (Exception e) 
+                {
+                        System.err.println(e);
+                }
+            }
+        }	
+
+        public void makeSavedData(File f, PetRock p) 
+        {
+            GsonBuilder gsonB = new GsonBuilder();
+
+            try 
+            {
+                if (!f.exists())
+                    f = new File("SavedData.json");
+                
+                String jsonData = gsonB.setPrettyPrinting().create().toJson(p);
+                FileWriter fw = new FileWriter(f.getPath());
+
+                fw.write(jsonData);	
+                fw.close();
+            } 
+            catch (Exception e) 
+            {
+                System.err.println(e);
+            }
+        }
+
     // Miscellaneous Methods.
         @Override
         public String toString()
