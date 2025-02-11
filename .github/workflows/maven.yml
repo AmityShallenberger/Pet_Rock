@@ -27,10 +27,6 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-    - name: move back a directory
-      run: cd ..
-    - name: move back a directory2
-      run: cd ..
     - name: Build with Maven
       run: mvn -B package --file ~/PetRockProject/pet_rock_id/pom.xml
 
